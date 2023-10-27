@@ -55,9 +55,10 @@ class _OtpPageState extends State<OtpPage> {
                     maxLength: 1,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      // color: Colors.black,
+                    ),
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
@@ -86,9 +87,10 @@ class _OtpPageState extends State<OtpPage> {
                     maxLength: 1,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      // color: Colors.black,
+                    ),
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
@@ -115,9 +117,10 @@ class _OtpPageState extends State<OtpPage> {
                   child: TextFormField(
                     maxLength: 1,
                     style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      // color: Colors.black,
+                    ),
                     keyboardType: TextInputType.number,
                     autofocus: true,
                     textAlign: TextAlign.center,
@@ -146,9 +149,10 @@ class _OtpPageState extends State<OtpPage> {
                   child: TextFormField(
                     maxLength: 1,
                     style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      // color: Colors.black,
+                    ),
                     keyboardType: TextInputType.number,
                     autofocus: true,
                     textAlign: TextAlign.center,
@@ -187,9 +191,10 @@ class _OtpPageState extends State<OtpPage> {
                     child: const Text(
                       'Resend',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: Colors.black),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        // color: Colors.black,
+                      ),
                     ),
                   ),
                 ],

@@ -8,6 +8,9 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  bool isShow1 = false;
+  bool isShow2 = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +42,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 width: double.infinity,
-                height: 55,
+                height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
@@ -47,10 +50,21 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
                 child: TextFormField(
-                  decoration: const InputDecoration(
+                  obscureText: !isShow1,
+                  decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter New Password',
-                    prefixIcon: Icon(Icons.lock_outline),
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isShow1 = !isShow1;
+                        });
+                      },
+                      child: Icon(isShow1
+                          ? Icons.remove_red_eye
+                          : Icons.remove_red_eye_outlined),
+                    ),
                   ),
                   cursorColor: const Color.fromARGB(246, 143, 143, 143),
                 ),
@@ -76,7 +90,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 width: double.infinity,
-                height: 55,
+                height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
@@ -84,12 +98,22 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
                 child: TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Confirm Password',
-                    prefixIcon: Icon(Icons.lock_outline),
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isShow2 = !isShow2;
+                        });
+                      },
+                      child: Icon(isShow2
+                          ? Icons.remove_red_eye
+                          : Icons.remove_red_eye_outlined),
+                    ),
                   ),
-                  obscureText: true,
+                  obscureText: !isShow2,
                   cursorColor: const Color.fromARGB(246, 143, 143, 143),
                 ),
               ),

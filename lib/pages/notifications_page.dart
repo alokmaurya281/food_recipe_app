@@ -38,10 +38,16 @@ class _NotificationPageState extends State<NotificationPage> {
                             ),
                           ),
                         ),
-                        const Text(
+                        Text(
                           'No  Notifications Yet !',
                           style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 22),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 22,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
                         ),
                         ElevatedButton(
                             onPressed: () {
@@ -74,9 +80,13 @@ class _NotificationPageState extends State<NotificationPage> {
                                     MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
                                   Container(
                                     width: 50,
-                                    height: 135,
+                                    // height: 55,
+                                    // padding: EdgeInsets.all(4),
                                     decoration: const BoxDecoration(
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -88,26 +98,41 @@ class _NotificationPageState extends State<NotificationPage> {
                                       ),
                                     ),
                                   ),
-                                  const Column(
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text('Notification category'),
+                                      const Text(
+                                        'Notification category',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
                                       Text(
                                         'Easy Pizza Recipe Veg Pizza',
                                         softWrap: true,
                                         maxLines: 2,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color:
+                                                Theme.of(context).primaryColor,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w700,
                                             overflow: TextOverflow.ellipsis),
                                       ),
                                     ],
                                   ),
-                                  const Text('5m ago')
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 5),
+                                    child: Text(
+                                      '5m ago',
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

@@ -28,11 +28,11 @@ class _SearchPageState extends State<SearchPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Search Results",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                       fontSize: 18,
                     ),
                   ),
@@ -87,7 +87,7 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                         ),
                       ),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -99,13 +99,13 @@ class _SearchPageState extends State<SearchPage> {
                               softWrap: true,
                               maxLines: 2,
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
-                          Row(
+                          const Row(
                             children: [
                               SizedBox(
                                 width: 25,

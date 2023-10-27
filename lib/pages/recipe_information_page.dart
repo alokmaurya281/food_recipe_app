@@ -22,11 +22,15 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
       ),
       body: ListView(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16),
+          Padding(
+            padding: const EdgeInsets.all(16),
             child: Text(
               'Pizza Recipes Full title details ',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
           _recipeImage(),
@@ -46,13 +50,14 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
           const SizedBox(
             height: 30,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'Related Recipes',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),
@@ -69,11 +74,15 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'Instructions',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         ),
         const SizedBox(
@@ -82,11 +91,12 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
         Container(
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
+          child: Text(
             'You can never have too many main course recipes, so give Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs a try. One serving contains 543 calories, 17g of protein, and 16g of fat. For 1.57 per serving, this recipe covers 22% of your daily requirements of vitamins and minerals. This recipe serves 2. A mixture of butter, white wine, pasta, and a handful of other ingredients are all it takes to make this recipe so yummy. 209 people have tried and liked this recipe. It is brought to you by fullbellysisters.blogspot.com. From preparation to the plate, this recipe takes approximately 45 minutes. Taking all factors into account, this recipe earns a spoonacular score of 83%, which is tremendous. If you like this recipe, take a look at these similar recipes: Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs, Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs, and Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs.',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
+              color: Theme.of(context).primaryColor,
             ),
             textAlign: TextAlign.justify,
           ),
@@ -99,11 +109,15 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'Description',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         ),
         const SizedBox(
@@ -112,11 +126,12 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
         Container(
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Text(
+          child: Text(
             'You can never have too many main course recipes, so give Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs a try. One serving contains 543 calories, 17g of protein, and 16g of fat. For 1.57 per serving, this recipe covers 22% of your daily requirements of vitamins and minerals. This recipe serves 2. A mixture of butter, white wine, pasta, and a handful of other ingredients are all it takes to make this recipe so yummy. 209 people have tried and liked this recipe. It is brought to you by fullbellysisters.blogspot.com. From preparation to the plate, this recipe takes approximately 45 minutes. Taking all factors into account, this recipe earns a spoonacular score of 83%, which is tremendous. If you like this recipe, take a look at these similar recipes: Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs, Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs, and Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs.',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
+              color: Theme.of(context).primaryColor,
             ),
             textAlign: TextAlign.justify,
           ),
@@ -131,17 +146,18 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Ingredients (For One Person)',
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 18,
+              color: Theme.of(context).primaryColor,
             ),
           ),
           const SizedBox(
             height: 12,
           ),
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -150,9 +166,10 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 50,
               ),
               Text(
@@ -160,6 +177,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ],
@@ -175,8 +193,8 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
               primary: false,
               itemCount: ingredientItemCount,
               itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -186,9 +204,10 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
                       Text(
@@ -196,6 +215,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ],
@@ -235,11 +255,12 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text(
+                  Text(
                     'Rs 20 Cost Per Serving',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
+                      color: Theme.of(context).primaryColor,
                     ),
                   )
                 ],
@@ -262,11 +283,12 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text(
+                  Text(
                     '200 Likes',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ],
@@ -297,11 +319,12 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text(
+                  Text(
                     'Ready in 25 Minutes',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
+                      color: Theme.of(context).primaryColor,
                     ),
                   )
                 ],
@@ -324,11 +347,12 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text(
+                  Text(
                     '4.5',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ],
@@ -386,12 +410,14 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                           ),
                         ),
                       ),
-                      const Text(
+                      Text(
                         'Pizza Recipe popular',
                         style: TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).primaryColor,
+                        ),
                       )
                     ],
                   ),

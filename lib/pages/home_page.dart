@@ -28,11 +28,11 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Popular Recipes",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                       fontSize: 18,
                     ),
                   ),
@@ -56,11 +56,11 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Editor's Choice",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                       fontSize: 18,
                     ),
                   ),
@@ -111,12 +111,14 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Pizza Recipe popular',
                       style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     )
                   ],
                 ),
@@ -161,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -173,13 +175,13 @@ class _HomePageState extends State<HomePage> {
                               softWrap: true,
                               maxLines: 2,
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
-                          Row(
+                          const Row(
                             children: [
                               SizedBox(
                                 width: 25,

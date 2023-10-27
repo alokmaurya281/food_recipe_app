@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/pages/change_theme.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -29,9 +30,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
+                Text(
                   'Account',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 const SizedBox(
                   height: 8,
@@ -122,9 +127,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
+                Text(
                   'Support & About',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 const SizedBox(
                   height: 8,
@@ -179,9 +188,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
+                Text(
                   'Actions',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 const SizedBox(
                   height: 8,
@@ -191,9 +204,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(138, 189, 188, 188),
                       borderRadius: BorderRadius.circular(15)),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.report),
                           SizedBox(
@@ -208,28 +221,36 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Row(
                         children: [
-                          Icon(Icons.display_settings),
-                          SizedBox(
+                          const Icon(Icons.display_settings),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Change Theme',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const ChangeTheme();
+                              }));
+                            },
+                            child: const Text(
+                              'Change Theme',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.info),
                           SizedBox(
@@ -244,10 +265,10 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.logout),
                           SizedBox(

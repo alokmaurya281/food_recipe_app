@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool passShow = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,12 +88,22 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 child: TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter Password',
-                    prefixIcon: Icon(Icons.lock_outline),
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          passShow = !passShow;
+                        });
+                      },
+                      child: Icon(passShow
+                          ? Icons.remove_red_eye
+                          : Icons.remove_red_eye_outlined),
+                    ),
                   ),
-                  obscureText: true,
+                  obscureText: !passShow,
                   cursorColor: const Color.fromARGB(246, 143, 143, 143),
                 ),
               ),
@@ -143,9 +154,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text(
                   'Forgot Password ?',
                   style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Color.fromARGB(246, 0, 0, 0)),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    // color: Color.fromARGB(246, 0, 0, 0),
+                  ),
                 ),
               ),
             ),
@@ -246,7 +258,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      color: Color.fromARGB(238, 9, 9, 9),
+                      // color: Color.fromARGB(238, 9, 9, 9),
                     ),
                   ),
                 )
