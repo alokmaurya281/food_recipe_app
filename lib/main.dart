@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/main_screen.dart';
+import 'package:food_recipe_app/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: const LoginPage(),
     );
   }
 }
