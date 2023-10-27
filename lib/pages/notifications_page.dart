@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/widgets/drawer_widget.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -13,7 +14,7 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      drawer: const Drawer(),
+      drawer: const DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: ListView(
@@ -24,7 +25,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 150,
                         ),
                         Container(
@@ -48,7 +49,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                 notificationCount = 10;
                               });
                             },
-                            child: Text('Refresh'))
+                            child: const Text('Refresh'))
                       ],
                     ),
                   )
@@ -106,7 +107,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                       ),
                                     ],
                                   ),
-                                  Text('5m ago')
+                                  const Text('5m ago')
                                 ],
                               ),
                             ),

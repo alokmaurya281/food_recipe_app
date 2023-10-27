@@ -26,6 +26,9 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 16,
+                ),
                 const Text(
                   'Account',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
@@ -35,9 +38,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Container(
                   // margin: EdgeInsets.symmetric(horizontal: 8),
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      color: Color.fromARGB(138, 189, 188, 188),
+                      color: const Color.fromARGB(138, 189, 188, 188),
                       borderRadius: BorderRadius.circular(15)),
                   child: const Column(
                     children: [
@@ -45,66 +48,66 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           Icon(Icons.person),
                           SizedBox(
-                            width: 12,
+                            width: 16,
                           ),
                           Text(
                             'Edit Profile',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 12,
+                        height: 16,
                       ),
                       Row(
                         children: [
                           Icon(Icons.security),
                           SizedBox(
-                            width: 12,
+                            width: 16,
                           ),
                           Text(
                             'Privacy',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 12,
+                        height: 16,
                       ),
                       Row(
                         children: [
                           Icon(Icons.delete),
                           SizedBox(
-                            width: 12,
+                            width: 16,
                           ),
                           Text(
                             'Delete Account',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 12,
+                        height: 16,
                       ),
                       Row(
                         children: [
                           Icon(Icons.notifications),
                           SizedBox(
-                            width: 12,
+                            width: 16,
                           ),
                           Text(
                             'Notifications',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -114,7 +117,156 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 12,
+                  height: 16,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  'Support & About',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  // margin: EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(138, 189, 188, 188),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: const Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.policy),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            'Terms & Poilcy',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.help),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            'Help and Support',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  'Actions',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(138, 189, 188, 188),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: const Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.report),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            'Report a Problem',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.display_settings),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            'Change Theme',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.info),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            'Suggest a Feature',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.logout),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
                 ),
               ],
             ),

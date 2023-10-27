@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/edit_profile_page.dart';
 import 'package:food_recipe_app/pages/settings_page.dart';
+import 'package:food_recipe_app/widgets/drawer_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -24,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onTap: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return SettingsPage();
+                  return const SettingsPage();
                 }));
               },
               child: const Padding(
@@ -34,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
             )
           ],
         ),
-        drawer: const Drawer(),
+        drawer: const DrawerWidget(),
         body: ListView(
           children: [
             const SizedBox(
@@ -106,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return EditProfilePage();
+                                    return const EditProfilePage();
                                   },
                                 ),
                               );

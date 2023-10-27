@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/recipe_information_page.dart';
+import 'package:food_recipe_app/widgets/drawer_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      drawer: const Drawer(),
+      drawer: const DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: ListView(
@@ -282,7 +283,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () {},
               child: const Icon(
-                Icons.filter_list,
+                Icons.search,
                 color: Colors.white,
                 size: 22,
               ),

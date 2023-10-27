@@ -13,11 +13,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    SearchPage(),
-    NotificationPage(),
-    ProfilePage(),
+  final List<Widget> _widgetOptions = <Widget>[
+    const HomePage(),
+    const SearchPage(),
+    const NotificationPage(),
+    const ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
