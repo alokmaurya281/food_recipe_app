@@ -32,7 +32,7 @@ class _SearchPageState extends State<SearchPage> {
                     "Search Results",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontSize: 18,
                     ),
                   ),
@@ -99,7 +99,7 @@ class _SearchPageState extends State<SearchPage> {
                               softWrap: true,
                               maxLines: 2,
                               style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                                color: Theme.of(context).colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -180,6 +180,9 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             child: TextFormField(
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Search Reciepe',

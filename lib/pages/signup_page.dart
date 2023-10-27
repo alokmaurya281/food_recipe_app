@@ -29,11 +29,15 @@ class _SignupPageState extends State<SignupPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Email',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -50,6 +54,9 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter email address',
@@ -66,11 +73,15 @@ class _SignupPageState extends State<SignupPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Name',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -87,6 +98,9 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter Name',
@@ -103,11 +117,15 @@ class _SignupPageState extends State<SignupPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Password',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -124,6 +142,9 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter Password',
@@ -264,12 +285,12 @@ class _SignupPageState extends State<SignupPage> {
                       return const LoginPage();
                     }));
                   },
-                  child: const Text(
+                  child: Text(
                     'Login',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      // color: Color.fromARGB(238, 9, 9, 9),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 )

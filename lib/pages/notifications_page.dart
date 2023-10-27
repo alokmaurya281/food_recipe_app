@@ -50,12 +50,20 @@ class _NotificationPageState extends State<NotificationPage> {
                           height: 8,
                         ),
                         ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                notificationCount = 10;
-                              });
-                            },
-                            child: const Text('Refresh'))
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(239, 11, 116, 182),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              notificationCount = 10;
+                            });
+                          },
+                          child: const Text(
+                            'Refresh',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
                       ],
                     ),
                   )
@@ -116,8 +124,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                         softWrap: true,
                                         maxLines: 2,
                                         style: TextStyle(
-                                            color:
-                                                Theme.of(context).primaryColor,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w700,
                                             overflow: TextOverflow.ellipsis),

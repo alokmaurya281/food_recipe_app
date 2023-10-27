@@ -33,6 +33,9 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
         primaryColor: Colors.black,
+        colorScheme: const ColorScheme.light(
+          secondary: Colors.black,
+        ),
       ),
       darkTheme: ThemeData.dark(
         useMaterial3: true,
@@ -41,7 +44,10 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
         // colorScheme: ColorScheme.dark(),
-        primaryColor: const Color.fromARGB(255, 177, 175, 175),
+        primaryColor: const Color.fromARGB(255, 171, 171, 171),
+        colorScheme: const ColorScheme.dark(
+          secondary: Colors.white,
+        ),
       ),
       themeAnimationCurve: Curves.bounceInOut,
       themeMode: themeProvider.themeMode,

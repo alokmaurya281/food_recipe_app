@@ -30,11 +30,15 @@ class _LoginPageState extends State<LoginPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Email',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -51,6 +55,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter email address',
@@ -67,11 +74,15 @@ class _LoginPageState extends State<LoginPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Password',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -88,6 +99,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter Password',
@@ -151,12 +165,12 @@ class _LoginPageState extends State<LoginPage> {
                     return const ForgotPasswordPage();
                   }));
                 },
-                child: const Text(
+                child: Text(
                   'Forgot Password ?',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    // color: Color.fromARGB(246, 0, 0, 0),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ),
@@ -253,12 +267,12 @@ class _LoginPageState extends State<LoginPage> {
                       return const SignupPage();
                     }));
                   },
-                  child: const Text(
+                  child: Text(
                     'Create Account',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      // color: Color.fromARGB(238, 9, 9, 9),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 )

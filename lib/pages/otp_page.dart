@@ -23,11 +23,14 @@ class _OtpPageState extends State<OtpPage> {
           const SizedBox(
             height: 30,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'We have sent you a OTP on your email address please enter correct OTP to verify your Email Address.',
               textAlign: TextAlign.justify,
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
           const SizedBox(
@@ -54,10 +57,10 @@ class _OtpPageState extends State<OtpPage> {
                     autofocus: true,
                     maxLength: 1,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      // color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                     ),
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
@@ -86,10 +89,10 @@ class _OtpPageState extends State<OtpPage> {
                     autofocus: true,
                     maxLength: 1,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      // color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                     ),
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
@@ -116,10 +119,10 @@ class _OtpPageState extends State<OtpPage> {
                   ),
                   child: TextFormField(
                     maxLength: 1,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      // color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                     ),
                     keyboardType: TextInputType.number,
                     autofocus: true,
@@ -148,10 +151,10 @@ class _OtpPageState extends State<OtpPage> {
                   ),
                   child: TextFormField(
                     maxLength: 1,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      // color: Colors.black,
+                      color: Theme.of(context).primaryColor,
                     ),
                     keyboardType: TextInputType.number,
                     autofocus: true,
@@ -188,12 +191,12 @@ class _OtpPageState extends State<OtpPage> {
                         fontWeight: FontWeight.bold),
                   ),
                   GestureDetector(
-                    child: const Text(
+                    child: Text(
                       'Resend',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
-                        // color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),

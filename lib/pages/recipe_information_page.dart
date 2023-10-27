@@ -57,11 +57,18 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
-          _relatedRecipes(),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const RecipeInformationPage();
+              }));
+            },
+            child: _relatedRecipes(),
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -81,7 +88,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
         ),
@@ -116,7 +123,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
         ),
@@ -151,7 +158,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 18,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           const SizedBox(
@@ -166,7 +173,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
               const SizedBox(
@@ -177,7 +184,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ],
@@ -416,7 +423,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                           overflow: TextOverflow.ellipsis,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       )
                     ],

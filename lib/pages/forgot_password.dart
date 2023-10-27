@@ -24,11 +24,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           const SizedBox(
             height: 30,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'Enter Your Registred Email Address we will send you a reset password link on your email.',
               textAlign: TextAlign.justify,
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ),
           const SizedBox(
@@ -37,11 +40,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Email',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -58,6 +65,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter email address',

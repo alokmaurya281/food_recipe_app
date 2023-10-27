@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                     "Popular Recipes",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontSize: 18,
                     ),
                   ),
@@ -47,7 +47,15 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            _popularRecipe(),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const RecipeInformationPage();
+                }));
+              },
+              child: _popularRecipe(),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -60,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                     "Editor's Choice",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontSize: 18,
                     ),
                   ),
@@ -117,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                         overflow: TextOverflow.ellipsis,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     )
                   ],
@@ -175,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                               softWrap: true,
                               maxLines: 2,
                               style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                                color: Theme.of(context).colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -256,6 +264,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: TextFormField(
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Search Recipe',

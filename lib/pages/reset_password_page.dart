@@ -29,11 +29,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Password',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -50,6 +54,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   obscureText: !isShow1,
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -77,11 +84,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   'Confirm Password',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -98,6 +109,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
                 child: TextFormField(
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Confirm Password',
