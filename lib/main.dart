@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/login_page.dart';
+import 'package:food_recipe_app/services/filter_provider.dart';
+import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/services/theme_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,12 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RecipeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FilterProvider(),
         ),
       ],
       child: const MyApp(),

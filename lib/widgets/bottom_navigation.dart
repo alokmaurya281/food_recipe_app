@@ -10,10 +10,12 @@ class BottomNavWidget extends StatefulWidget {
 }
 
 class _BottomNavWidgetState extends State<BottomNavWidget> {
-      List<Widget> pages = [
-      const HomePage(),
-      const SearchPage(),
-    ];
+  List<Widget> pages = [
+    const HomePage(),
+    const SearchPage(
+      searches: [],
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

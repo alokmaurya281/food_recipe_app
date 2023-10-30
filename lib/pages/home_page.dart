@@ -1,6 +1,11 @@
+import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/recipe_information_page.dart';
+import 'package:food_recipe_app/pages/search_page.dart';
+import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/widgets/drawer_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:flash/flash.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // @override
+  // void initState() {
+  //   // Provider.of<RecipeProvider>(context, listen: false).searchRecipe('burger');
+  //   super.initState();
+  // }
+  final TextEditingController _searchQueryController = TextEditingController();
+  // final _flashController = DefaultFlashController(context, builder: builder)
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -264,6 +277,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: TextFormField(
+              controller: _searchQueryController,
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
               ),
@@ -283,23 +297,103 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             width: 70,
             height: 50,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(239, 11, 116, 182),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      15,
+            child: Consumer<RecipeProvider>(
+              builder: (context, provider, child) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(239, 11, 116, 182),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          15,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              onPressed: () {},
-              child: const Icon(
-                Icons.search,
-                color: Colors.white,
-                size: 22,
-              ),
+                  onPressed: () async {
+                    if (_searchQueryController.text.isNotEmpty) {
+                      await provider.searchRecipe(_searchQueryController.text);
+                      // print(provider.error);
+                      if (provider.error.isNotEmpty) {
+                        // ignore: use_build_context_synchronously
+                        context.showFlash<bool>(
+                          // barrierColor: Theme.of(context).primaryColor,
+                          barrierDismissible: true,
+                          duration: const Duration(seconds: 2),
+                          builder: (context, controller) => FlashBar(
+                            controller: controller,
+                            behavior: FlashBehavior.floating,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                              side: BorderSide(
+                                color: Color.fromARGB(238, 182, 34, 11),
+                                strokeAlign: BorderSide.strokeAlignInside,
+                              ),
+                            ),
+                            margin: const EdgeInsets.all(32.0),
+                            clipBehavior: Clip.antiAlias,
+                            // showProgressIndicator: true,
+                            indicatorColor:
+                                const Color.fromARGB(238, 182, 31, 11),
+                            icon: const Icon(Icons.error),
+                            // title: const Text('Error'),
+                            content: Text(
+                              provider.error,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return SearchPage(searches: provider.recipesList);
+                          }),
+                        );
+                      }
+                    } else {
+                      context.showFlash<bool>(
+                        // barrierColor: Theme.of(context).primaryColor,
+                        barrierDismissible: true,
+                        duration: const Duration(seconds: 2),
+                        builder: (context, controller) => FlashBar(
+                          controller: controller,
+                          behavior: FlashBehavior.floating,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                            side: BorderSide(
+                              color: Color.fromARGB(238, 182, 34, 11),
+                              strokeAlign: BorderSide.strokeAlignInside,
+                            ),
+                          ),
+                          margin: const EdgeInsets.all(32.0),
+                          clipBehavior: Clip.antiAlias,
+                          // showProgressIndicator: true,
+                          indicatorColor:
+                              const Color.fromARGB(238, 182, 31, 11),
+                          icon: const Icon(Icons.error),
+                          // title: const Text('Error'),
+                          content: Text(
+                            'Please Enter Your Search Query',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                );
+              },
             ),
           ),
         ],
