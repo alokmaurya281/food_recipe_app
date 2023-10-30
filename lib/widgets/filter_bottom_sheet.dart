@@ -54,7 +54,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  width: 120,
+                  width: 110,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
@@ -84,11 +84,8 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
                 SizedBox(
-                  width: 100,
+                  width: 90,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
@@ -120,11 +117,8 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
                 SizedBox(
-                  width: 100,
+                  width: 90,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
