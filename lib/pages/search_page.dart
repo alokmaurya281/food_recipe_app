@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/models/recipe.dart';
 import 'package:food_recipe_app/pages/recipe_information_page.dart';
-import 'package:food_recipe_app/services/filter_provider.dart';
 import 'package:food_recipe_app/widgets/filter_bottom_sheet.dart';
-import 'package:provider/provider.dart';
 // import 'package:food_recipe_app/widgets/drawer_widget.dart';
 
 class SearchPage extends StatefulWidget {
@@ -18,16 +16,10 @@ class _SearchPageState extends State<SearchPage> {
   List selectedFilters = [];
   bool isBreakfastfilter = false;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      // drawer: const DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: ListView(
@@ -193,39 +185,44 @@ class _SearchPageState extends State<SearchPage> {
 
   Padding _searchField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            width: 250,
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(
-                  15,
+          Expanded(
+            child: Container(
+              width: 250,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(
+                    15,
+                  ),
+                ),
+                border: Border.all(
+                  color: const Color.fromRGBO(123, 123, 123, 1),
                 ),
               ),
-              border: Border.all(
-                color: const Color.fromRGBO(123, 123, 123, 1),
-              ),
-            ),
-            child: TextFormField(
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-              ),
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Search Reciepe',
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Color.fromRGBO(123, 123, 123, 1),
-                  size: 28,
-                  weight: 28,
+              child: TextFormField(
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                 ),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search Reciepe',
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Color.fromRGBO(123, 123, 123, 1),
+                    size: 28,
+                    weight: 28,
+                  ),
+                ),
+                cursorColor: const Color.fromRGBO(123, 123, 123, 1),
               ),
-              cursorColor: const Color.fromRGBO(123, 123, 123, 1),
             ),
+          ),
+          const SizedBox(
+            width: 10,
           ),
           SizedBox(
             width: 70,
@@ -247,7 +244,7 @@ class _SearchPageState extends State<SearchPage> {
                     context: context,
                     showDragHandle: true,
                     builder: (context) {
-                      return FilterBottomSheet();
+                      return const FilterBottomSheet();
                     });
               },
               child: const Icon(

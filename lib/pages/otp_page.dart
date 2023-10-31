@@ -1,13 +1,26 @@
+import 'package:flash/flash.dart';
+import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/pages/login_page.dart';
+import 'package:food_recipe_app/services/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key});
+  final email;
+  const OtpPage({super.key, required this.email});
 
   @override
   State<OtpPage> createState() => _OtpPageState();
 }
 
 class _OtpPageState extends State<OtpPage> {
+  TextEditingController _field1Controller = TextEditingController();
+  TextEditingController _field2Controller = TextEditingController();
+
+  TextEditingController _field3Controller = TextEditingController();
+
+  TextEditingController _field4Controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +67,7 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                   ),
                   child: TextFormField(
+                    controller: _field1Controller,
                     autofocus: true,
                     maxLength: 1,
                     textAlign: TextAlign.center,
@@ -86,6 +100,7 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                   ),
                   child: TextFormField(
+                    controller: _field2Controller,
                     autofocus: true,
                     maxLength: 1,
                     textAlign: TextAlign.center,
@@ -118,6 +133,7 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                   ),
                   child: TextFormField(
+                    controller: _field3Controller,
                     maxLength: 1,
                     style: TextStyle(
                       fontSize: 18,
@@ -150,6 +166,7 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                   ),
                   child: TextFormField(
+                    controller: _field4Controller,
                     maxLength: 1,
                     style: TextStyle(
                       fontSize: 18,
@@ -210,19 +227,112 @@ class _OtpPageState extends State<OtpPage> {
             child: SizedBox(
               height: 50,
               width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(239, 11, 116, 182),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
-                onPressed: () {},
-                child: const Text(
-                  'Verify',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
-                ),
+              child: Consumer<AuthProvider>(
+                builder: (context, provider, child) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(239, 11, 116, 182),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15))),
+                    onPressed: () async {
+                      final enteredOtp = _field1Controller.text +
+                          _field2Controller.text +
+                          _field3Controller.text +
+                          _field4Controller.text;
+                      provider.setLoading(true);
+                      final isVerified =
+                          await provider.verifyOTP(enteredOtp, widget.email);
+                      if (isVerified) {
+                        // ignore: use_build_context_synchronously
+                        context.showFlash<bool>(
+                          // barrierColor: Theme.of(context).primaryColor,
+                          barrierDismissible: true,
+                          duration: const Duration(seconds: 2),
+                          builder: (context, controller) => FlashBar(
+                            controller: controller,
+                            behavior: FlashBehavior.floating,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                              side: BorderSide(
+                                color: Color.fromARGB(235, 11, 182, 19),
+                                strokeAlign: BorderSide.strokeAlignInside,
+                              ),
+                            ),
+                            margin: const EdgeInsets.all(32.0),
+                            clipBehavior: Clip.antiAlias,
+                            // showProgressIndicator: true,
+                            indicatorColor: Color.fromARGB(235, 17, 182, 11),
+                            icon: const Icon(Icons.error),
+                            // title: const Text('Error'),
+                            content: Text(
+                              'Email Verified Now you can login...',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        );
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) {
+                          return LoginPage();
+                        }));
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        context.showFlash<bool>(
+                          // barrierColor: Theme.of(context).primaryColor,
+                          barrierDismissible: true,
+                          duration: const Duration(seconds: 2),
+                          builder: (context, controller) => FlashBar(
+                            controller: controller,
+                            behavior: FlashBehavior.floating,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                              side: BorderSide(
+                                color: Color.fromARGB(236, 182, 14, 11),
+                                strokeAlign: BorderSide.strokeAlignInside,
+                              ),
+                            ),
+                            margin: const EdgeInsets.all(32.0),
+                            clipBehavior: Clip.antiAlias,
+                            // showProgressIndicator: true,
+                            indicatorColor:
+                                const Color.fromARGB(236, 182, 57, 11),
+                            icon: const Icon(Icons.error),
+                            // title: const Text('Error'),
+                            content: Text(
+                              provider.error,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      provider.setLoading(false);
+                    },
+                    child: context.read<AuthProvider>().isLoading
+                        ? SizedBox(
+                            height: 15,
+                            width: 15,
+                            child: Center(
+                              child: CircularProgressIndicator.adaptive(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          )
+                        : const Text(
+                            'Verify',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          ),
+                  );
+                },
               ),
             ),
           ),

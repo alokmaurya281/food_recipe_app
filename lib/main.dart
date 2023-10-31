@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/login_page.dart';
+import 'package:food_recipe_app/pages/main_screen.dart';
+import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/filter_provider.dart';
 import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/services/theme_provider.dart';
@@ -19,19 +21,38 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => FilterProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  void token() {
+    Provider.of<AuthProvider>(context, listen: false).getToken();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    token();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    // print(themeProvider.themeMode);
+    final themeProvider = context.watch<ThemeProvider>();
+    final authProvider =
+        context.watch<AuthProvider>(); // print(themeProvider.themeMode);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(
@@ -59,7 +80,9 @@ class MyApp extends StatelessWidget {
       ),
       themeAnimationCurve: Curves.bounceInOut,
       themeMode: themeProvider.themeMode,
-      home: const LoginPage(),
+      home: authProvider.isLoggedIn && authProvider.accessToken.isNotEmpty
+          ? const MainScreen()
+          : const LoginPage(),
     );
   }
 }

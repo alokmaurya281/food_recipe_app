@@ -1,4 +1,9 @@
+import 'package:flash/flash.dart';
+import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/pages/login_page.dart';
+import 'package:food_recipe_app/services/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -69,9 +74,46 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            const ListTile(
-              leading: Icon(Icons.logout),
-              title: Text(
+            ListTile(
+              leading: const Icon(Icons.logout),
+              onTap: () async {
+                await context.read<AuthProvider>().signOut();
+                // ignore: use_build_context_synchronously
+                context.showFlash<bool>(
+                  // barrierColor: Theme.of(context).primaryColor,
+                  barrierDismissible: true,
+                  duration: const Duration(seconds: 2),
+                  builder: (context, controller) => FlashBar(
+                    controller: controller,
+                    behavior: FlashBehavior.floating,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      side: BorderSide(
+                        color: Color.fromARGB(237, 11, 182, 54),
+                        strokeAlign: BorderSide.strokeAlignInside,
+                      ),
+                    ),
+                    margin: const EdgeInsets.all(32.0),
+                    clipBehavior: Clip.antiAlias,
+                    // showProgressIndicator: true,
+                    indicatorColor: const Color.fromARGB(237, 11, 182, 28),
+                    icon: const Icon(Icons.error),
+                    // title: const Text('Error'),
+                    content: Text(
+                      'Signed Out Successfully',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                );
+                // ignore: use_build_context_synchronously
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return const LoginPage();
+                }));
+              },
+              title: const Text(
                 'Logout',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),

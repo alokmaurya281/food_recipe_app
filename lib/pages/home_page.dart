@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar(),
       drawer: const DrawerWidget(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           children: [
             _searchField(),
@@ -162,6 +162,7 @@ class _HomePageState extends State<HomePage> {
           shrinkWrap: true,
           itemCount: 10,
           itemBuilder: (context, index) {
+            var deviceWidth = MediaQuery.of(context).size.width;
             return SizedBox(
               width: double.infinity,
               height: 150,
@@ -170,26 +171,32 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        width: 150,
-                        height: 135,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
+                      Expanded(
+                        child: Container(
+                          width: 150,
+                          height: 135,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage('assets/images/pizza.jpeg')),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
+                              image: AssetImage('assets/images/pizza.jpeg'),
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        width: 20,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           SizedBox(
-                            width: 110,
+                            width: deviceWidth > 400 ? 300 : 130,
                             // height: 75,
                             child: Text(
                               'Easy Pizza Recipe Veg Pizza',
@@ -227,6 +234,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
+                      const SizedBox(
+                        width: 20,
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context)
@@ -261,38 +271,43 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            width: 250,
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(
-                  15,
+          Expanded(
+            child: Container(
+              // width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(
+                    15,
+                  ),
+                ),
+                border: Border.all(
+                  color: const Color.fromRGBO(123, 123, 123, 1),
                 ),
               ),
-              border: Border.all(
-                color: const Color.fromRGBO(123, 123, 123, 1),
-              ),
-            ),
-            child: TextFormField(
-              controller: _searchQueryController,
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-              ),
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Search Recipe',
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Color.fromRGBO(123, 123, 123, 1),
-                  size: 28,
-                  weight: 28,
+              child: TextFormField(
+                controller: _searchQueryController,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
                 ),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search Recipe',
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Color.fromRGBO(123, 123, 123, 1),
+                    size: 28,
+                    weight: 28,
+                  ),
+                ),
+                cursorColor: const Color.fromRGBO(123, 123, 123, 1),
               ),
-              cursorColor: const Color.fromRGBO(123, 123, 123, 1),
             ),
+          ),
+          const SizedBox(
+            width: 8,
           ),
           SizedBox(
             width: 70,

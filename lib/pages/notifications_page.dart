@@ -107,31 +107,33 @@ class _NotificationPageState extends State<NotificationPage> {
                                     ),
                                   ),
                                   const SizedBox(
-                                    width: 4,
+                                    width: 6,
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      const Text(
-                                        'Notification category',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                      Text(
-                                        'Easy Pizza Recipe Veg Pizza',
-                                        softWrap: true,
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            overflow: TextOverflow.ellipsis),
-                                      ),
-                                    ],
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        const Text(
+                                          'Notification category',
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                        Text(
+                                          'Easy Pizza Recipe Veg Pizza',
+                                          softWrap: true,
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              overflow: TextOverflow.ellipsis),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(right: 5),

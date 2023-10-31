@@ -29,7 +29,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
