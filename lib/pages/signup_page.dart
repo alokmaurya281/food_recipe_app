@@ -243,7 +243,6 @@ class _SignupPageState extends State<SignupPage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                     onPressed: () async {
-                      provider.setLoading(true);
                       if (_emailController.text.isEmpty &&
                           _passwordController.text.isEmpty &&
                           _usernameController.text.isEmpty &&
@@ -279,6 +278,8 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         );
                       } else {
+                        provider.setLoading(true);
+
                         // print(context.read<AuthProvider>().isLoading);
                         await provider.signup(
                             _emailController.text,
@@ -387,7 +388,7 @@ class _SignupPageState extends State<SignupPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
                 onPressed: () async {
-                  await context.read<AuthProvider>().signInWithGoogle();
+                  await context.read<AuthProvider>().signInWithGoogle('Google');
                   if (context.read<AuthProvider>().error.isEmpty &&
                       context.read<AuthProvider>().user!.email.isNotEmpty) {
                     // ignore: use_build_context_synchronously

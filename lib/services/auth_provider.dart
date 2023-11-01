@@ -34,7 +34,6 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // signup
-
   Future<void> signup(
       String email, String password, String username, String name) async {
     _error = '';
@@ -53,6 +52,7 @@ class AuthProvider extends ChangeNotifier {
           "name": name
         }),
       );
+
       final Map<String, dynamic> data = json.decode(response.body);
       if (response.statusCode == 201) {
         _user = User.fromJson(data['data']);
@@ -189,6 +189,106 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // forgotpass
+
+  Future<void> forgotPassword(String email) async {
+    _error = '';
+    // _isLoading = true;
+    notifyListeners();
+    try {
+      final response = await http.post(
+        Uri.parse(forgotPassUrl),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          "email": email,
+        }),
+      );
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (response.statusCode == 201) {
+        // _isLoading = false;
+        _otp = data['data']['otp'];
+        notifyListeners();
+      } else {
+        _error = data['message'];
+        // _isLoading = false;
+        notifyListeners();
+      }
+    } catch (e) {
+      _error = e.toString();
+      // _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // forgot pass account verification
+  Future<bool> accountVerify(otp, email) async {
+    _error = '';
+    bool _isVerified = false;
+    try {
+      final response = await http.post(
+        Uri.parse(accountVerifyUrl),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          "email": email,
+          "otp": otp,
+        }),
+      );
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        _isVerified = true;
+        notifyListeners();
+      } else {
+        _error = data['message'];
+        // _isLoading = false;
+        _isVerified = false;
+        notifyListeners();
+      }
+    } catch (e) {
+      _error = e.toString();
+      // _isLoading = false;
+      _isVerified = false;
+      notifyListeners();
+    }
+    return _isVerified;
+  }
+
+  // reset pass
+  Future<bool> resetPassword(email, password) async {
+    _error = '';
+    bool _isChanged = false;
+    try {
+      final response = await http.post(
+        Uri.parse(resetpassUrl),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          "email": email,
+          "password": password,
+        }),
+      );
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        _isChanged = true;
+        notifyListeners();
+      } else {
+        _error = data['message'];
+        _isChanged = false;
+        notifyListeners();
+      }
+    } catch (e) {
+      _error = e.toString();
+      // _isLoading = false;
+      _isChanged = false;
+      notifyListeners();
+    }
+    return _isChanged;
+  }
+
   // signout
 
   Future<void> signout() async {
@@ -196,11 +296,12 @@ class AuthProvider extends ChangeNotifier {
     await getToken();
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<void> signInWithGoogle(type) async {
     _error = '';
     try {
       _user = await _googleSignIn.signIn();
       notifyListeners();
+      await socialSignin(type, _user.email, _user.displayName, _user.id);
       if (_user == null) {
         _error = 'User does not exist';
         notifyListeners();
@@ -214,5 +315,40 @@ class AuthProvider extends ChangeNotifier {
     await _googleSignIn.signOut();
     _user = null;
     notifyListeners();
+  }
+
+  // social signin
+
+  Future<void> socialSignin(type, email, name, socialId) async {
+    _error = '';
+
+    try {
+      final response = await http.post(
+        Uri.parse(socialLoginUrl),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          "email": email,
+          "name": name,
+          "type": type,
+          "socialId": socialId,
+        }),
+      );
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        await setToken(true, data['data']['accessToken']);
+        await getToken();
+        _isLoggedIn = true;
+        _accessToken = data['data']['accessToken'];
+        notifyListeners();
+      } else {
+        _error = data['message'];
+        notifyListeners();
+      }
+    } catch (e) {
+      _error = e.toString();
+      notifyListeners();
+    }
   }
 }

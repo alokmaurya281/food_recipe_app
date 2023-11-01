@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+
   runApp(
     MultiProvider(
       providers: [
@@ -38,8 +39,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void token() {
-    Provider.of<AuthProvider>(context, listen: false).getToken();
+  void token() async{
+    await Provider.of<AuthProvider>(context, listen: false).getToken();
   }
 
   @override

@@ -30,3 +30,31 @@ const String verifyOtpUrl =
 
 const String loginUrl =
     'https://food-recipe-app-api.onrender.com/api/v1/user/login';
+
+// forgot pass url
+
+const String forgotPassUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/user/forgotpass';
+
+// restpass pass url
+
+const String resetpassUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/user/resetpass';
+
+// account verify pass url
+
+const String accountVerifyUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/user/accountverify';
+
+// social login  url
+
+const String socialLoginUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/user/social-signin';
+
+// profile  url
+
+const String profileUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/user/profile';
+
+const String userProfileByEmailUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/user/profile-by-email';

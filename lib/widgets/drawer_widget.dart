@@ -77,7 +77,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ListTile(
               leading: const Icon(Icons.logout),
               onTap: () async {
-                await context.read<AuthProvider>().signOut();
+                await context.read<AuthProvider>().signout();
                 // ignore: use_build_context_synchronously
                 context.showFlash<bool>(
                   // barrierColor: Theme.of(context).primaryColor,
