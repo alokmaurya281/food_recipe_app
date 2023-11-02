@@ -3,6 +3,8 @@ import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/pages/login_page.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
+import 'package:food_recipe_app/services/user_provider.dart';
+import 'package:food_recipe_app/widgets/shimmer_effect_widget.dart';
 import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -13,6 +15,17 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
+  void userData() async {
+    await Provider.of<UserProvider>(context, listen: false)
+        .userProfileByEmail(context.read<AuthProvider>().accessToken);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    userData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,28 +36,47 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           children: [
             SizedBox(
               height: 180,
-              child: DrawerHeader(
-                  child: Row(
-                children: [
-                  const SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/author.jpg'),
+              child: Consumer<UserProvider>(
+                builder: (context, provider, child) {
+                  if (provider.user.isEmpty) {
+                    provider.setLoading(true);
+                  } else {
+                    provider.setLoading(false);
+                  }
+                  return DrawerHeader(
+                    child: Row(
+                      children: [
+                        provider.isLoading
+                            ? ShimmerEffectWidget(width: 60, height: 60)
+                            : SizedBox(
+                                width: 60,
+                                height: 60,
+                                child: CircleAvatar(
+                                  backgroundImage: provider.user['image']
+                                          .toString()
+                                          .isNotEmpty
+                                      ? NetworkImage(provider.user['image'])
+                                      : const NetworkImage(
+                                          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbiUyMHBuZ3xlbnwwfHwwfHx8MA%3D%3D'),
+                                ),
+                              ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        provider.isLoading
+                            ? ShimmerEffectWidget(width: 100, height: 40)
+                            : Text(
+                                provider.isLoading ? '' : provider.user['name'],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              )
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Welcome Alok !',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  )
-                ],
-              )),
+                  );
+                },
+              ),
             ),
             const ListTile(
               leading: Icon(Icons.home),

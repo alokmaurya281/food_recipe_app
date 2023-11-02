@@ -5,11 +5,11 @@ import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/filter_provider.dart';
 import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/services/theme_provider.dart';
+import 'package:food_recipe_app/services/user_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-
   runApp(
     MultiProvider(
       providers: [
@@ -25,6 +25,9 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -39,7 +42,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void token() async{
+  void token() async {
     await Provider.of<AuthProvider>(context, listen: false).getToken();
   }
 

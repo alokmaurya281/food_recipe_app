@@ -58,3 +58,6 @@ const String profileUrl =
 
 const String userProfileByEmailUrl =
     'https://food-recipe-app-api.onrender.com/api/v1/user/profile-by-email';
+
+const String updateeProfileUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/user/updateprofile';

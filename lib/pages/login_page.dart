@@ -340,6 +340,8 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       provider.setLoading(true);
                       await provider.signInWithGoogle('Google');
+                      provider.setLoading(false);
+
                       if (provider.error.isEmpty &&
                           provider.user!.email.isNotEmpty) {
                         // ignore: use_build_context_synchronously
@@ -372,7 +374,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         );
-                        provider.setLoading(false);
+                        // ignore: use_build_context_synchronously
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
                           return const MainScreen();
