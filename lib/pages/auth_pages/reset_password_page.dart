@@ -1,8 +1,9 @@
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/login_page.dart';
+import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -200,10 +201,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             ),
                           );
                           await provider.signout();
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return LoginPage();
-                          }));
+                          GoRouter.of(context)
+                              .pushReplacementNamed(RouterConstants.login);
                         } else {
                           // ignore: use_build_context_synchronously
                           context.showFlash<bool>(

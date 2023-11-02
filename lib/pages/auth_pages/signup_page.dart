@@ -1,29 +1,33 @@
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/forgot_password.dart';
-import 'package:food_recipe_app/pages/main_screen.dart';
-import 'package:food_recipe_app/pages/signup_page.dart';
+import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+
   TextEditingController _passwordController = TextEditingController();
+
+  TextEditingController _nameController = TextEditingController();
+
   bool passShow = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Login',
+          'Create Account',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
@@ -69,6 +73,96 @@ class _LoginPageState extends State<LoginPage> {
                     border: InputBorder.none,
                     hintText: 'Enter email address',
                     prefixIcon: Icon(Icons.email_outlined),
+                  ),
+                  cursorColor: const Color.fromARGB(246, 143, 143, 143),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: Text(
+                  'Username',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: const Color.fromARGB(246, 143, 143, 143),
+                  ),
+                ),
+                child: TextFormField(
+                  controller: _usernameController,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Enter Username',
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                  cursorColor: const Color.fromARGB(246, 143, 143, 143),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: Text(
+                  'Name',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: const Color.fromARGB(246, 143, 143, 143),
+                  ),
+                ),
+                child: TextFormField(
+                  controller: _nameController,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Enter Name',
+                    prefixIcon: Icon(Icons.person),
                   ),
                   cursorColor: const Color.fromARGB(246, 143, 143, 143),
                 ),
@@ -148,9 +242,10 @@ class _LoginPageState extends State<LoginPage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                     onPressed: () async {
-                      provider.setLoading(true);
                       if (_emailController.text.isEmpty &&
-                          _passwordController.text.isEmpty) {
+                          _passwordController.text.isEmpty &&
+                          _usernameController.text.isEmpty &&
+                          _nameController.text.isEmpty) {
                         context.showFlash<bool>(
                           // barrierColor: Theme.of(context).primaryColor,
                           barrierDismissible: true,
@@ -162,18 +257,19 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16)),
                               side: BorderSide(
-                                color: Color.fromARGB(236, 182, 34, 11),
+                                color: Color.fromARGB(236, 182, 14, 11),
                                 strokeAlign: BorderSide.strokeAlignInside,
                               ),
                             ),
                             margin: const EdgeInsets.all(32.0),
                             clipBehavior: Clip.antiAlias,
                             // showProgressIndicator: true,
-                            indicatorColor: Color.fromARGB(236, 182, 11, 11),
+                            indicatorColor:
+                                const Color.fromARGB(236, 182, 57, 11),
                             icon: const Icon(Icons.error),
                             // title: const Text('Error'),
                             content: Text(
-                              'Please Fill all the fields',
+                              'All Fields Required',
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
@@ -181,49 +277,25 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       } else {
-                        await provider.login(
-                            _emailController.text, _passwordController.text);
-                        if (provider.error.isEmpty &&
-                            provider.accessToken.isNotEmpty) {
+                        provider.setLoading(true);
+
+                        // print(context.read<AuthProvider>().isLoading);
+                        await provider.signup(
+                            _emailController.text,
+                            _passwordController.text,
+                            _usernameController.text,
+                            _nameController.text);
+                        provider.setLoading(false);
+
+                        // ignore: use_build_context_synchronously
+                        if (provider.error.isEmpty) {
                           // ignore: use_build_context_synchronously
-                          context.showFlash<bool>(
-                            // barrierColor: Theme.of(context).primaryColor,
-                            barrierDismissible: true,
-                            duration: const Duration(seconds: 2),
-                            builder: (context, controller) => FlashBar(
-                              controller: controller,
-                              behavior: FlashBehavior.floating,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(16)),
-                                side: BorderSide(
-                                  color: Color.fromARGB(235, 42, 182, 11),
-                                  strokeAlign: BorderSide.strokeAlignInside,
-                                ),
-                              ),
-                              margin: const EdgeInsets.all(32.0),
-                              clipBehavior: Clip.antiAlias,
-                              // showProgressIndicator: true,
-                              indicatorColor: Color.fromARGB(235, 25, 182, 11),
-                              icon: const Icon(Icons.error),
-                              // title: const Text('Error'),
-                              content: Text(
-                                'Signed in successfully',
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                              ),
-                            ),
-                          );
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) {
-                            return const MainScreen();
-                          }));
+                          GoRouter.of(context).pushReplacementNamed(
+                              RouterConstants.otp,
+                              pathParameters: {'email': provider.user.email});
                         } else {
                           // ignore: use_build_context_synchronously
                           context.showFlash<bool>(
-                            // barrierColor: Theme.of(context).primaryColor,
                             barrierDismissible: true,
                             duration: const Duration(seconds: 2),
                             builder: (context, controller) => FlashBar(
@@ -233,14 +305,15 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16)),
                                 side: BorderSide(
-                                  color: Color.fromARGB(236, 182, 34, 11),
+                                  color: Color.fromARGB(236, 182, 14, 11),
                                   strokeAlign: BorderSide.strokeAlignInside,
                                 ),
                               ),
                               margin: const EdgeInsets.all(32.0),
                               clipBehavior: Clip.antiAlias,
                               // showProgressIndicator: true,
-                              indicatorColor: Color.fromARGB(236, 182, 11, 11),
+                              indicatorColor:
+                                  const Color.fromARGB(236, 182, 57, 11),
                               icon: const Icon(Icons.error),
                               // title: const Text('Error'),
                               content: Text(
@@ -254,7 +327,6 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         }
                       }
-                      provider.setLoading(false);
                     },
                     child: provider.isLoading
                         ? SizedBox(
@@ -268,7 +340,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           )
                         : const Text(
-                            'Login',
+                            'Signup',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -280,30 +352,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Center(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const ForgotPasswordPage();
-                  }));
-                },
-                child: Text(
-                  'Forgot Password ?',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-            ),
-          ),
+
           const SizedBox(
             height: 50,
           ),
@@ -342,8 +391,7 @@ class _LoginPageState extends State<LoginPage> {
                       await provider.signInWithGoogle('Google');
                       provider.setLoading(false);
 
-                      if (provider.error.isEmpty &&
-                          provider.user!.email.isNotEmpty) {
+                      if (provider.error.isEmpty && provider.user != null) {
                         // ignore: use_build_context_synchronously
                         context.showFlash<bool>(
                           // barrierColor: Theme.of(context).primaryColor,
@@ -375,10 +423,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                         // ignore: use_build_context_synchronously
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const MainScreen();
-                        }));
+                        GoRouter.of(context).pushReplacementNamed(
+                          RouterConstants.home,
+                        );
                       } else {
                         // ignore: use_build_context_synchronously
                         context.showFlash<bool>(
@@ -471,7 +518,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  "Don't Have an account ? ",
+                  "Already Have an account ? ",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -480,13 +527,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) {
-                      return const SignupPage();
-                    }));
+                    GoRouter.of(context).pushReplacementNamed(
+                      RouterConstants.login,
+                    );
                   },
                   child: Text(
-                    'Create Account',
+                    'Login',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -496,6 +542,9 @@ class _LoginPageState extends State<LoginPage> {
                 )
               ],
             ),
+          ),
+          const SizedBox(
+            height: 30,
           ),
         ],
       ),

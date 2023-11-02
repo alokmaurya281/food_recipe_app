@@ -1,10 +1,11 @@
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/login_page.dart';
+import 'package:food_recipe_app/pages/auth_pages/login_page.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/user_provider.dart';
 import 'package:food_recipe_app/widgets/shimmer_effect_widget.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -140,10 +141,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   ),
                 );
                 // ignore: use_build_context_synchronously
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return const LoginPage();
-                }));
+                context.goNamed('login');
               },
               title: const Text(
                 'Logout',

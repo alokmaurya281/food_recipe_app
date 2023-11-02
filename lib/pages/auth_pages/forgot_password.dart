@@ -1,8 +1,9 @@
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/forgot_pass_account_verify.dart';
+import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -167,14 +168,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               ),
                             ),
                           );
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return ForgotPassAccountVerify(
-                              email: _emailController.text,
-                            );
-                          }));
+                          GoRouter.of(context).pushNamed(
+                              RouterConstants.forgotPassAccountVerify,
+                              pathParameters: {'email': _emailController.text});
                         } else {
-                          await provider.forgotPassword(_emailController.text);
+                          // await provider.forgotPassword(_emailController.text);
                           // ignore: use_build_context_synchronously
                           context.showFlash<bool>(
                             // barrierColor: Theme.of(context).primaryColor,

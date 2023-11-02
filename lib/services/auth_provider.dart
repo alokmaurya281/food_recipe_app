@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  late final SharedPreferences sharedPreferences;
 
   dynamic _user;
   String _error = '';
@@ -301,9 +302,10 @@ class AuthProvider extends ChangeNotifier {
     try {
       _user = await _googleSignIn.signIn();
       notifyListeners();
-      await socialSignin(type, _user.email, _user.displayName, _user.id);
-      if (_user == null) {
-        _error = 'User does not exist';
+      if (_user != null) {
+        await socialSignin(type, _user.email, _user.displayName, _user.id);
+      } else {
+        _error = 'Plaese Select account to login';
         notifyListeners();
       }
     } catch (error) {
@@ -350,5 +352,34 @@ class AuthProvider extends ChangeNotifier {
       _error = e.toString();
       notifyListeners();
     }
+  }
+
+  Future<bool> isTokenValid(token) async {
+    bool _isValid = false;
+    _error = '';
+    try {
+      final response = await http.get(
+        Uri.parse(profileUrl),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $accessToken'
+        },
+      );
+
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        _user = data['data'];
+        _isValid = _user == null ? false : true;
+      }
+      if (!_isValid) {
+        _error = 'Unauthorized';
+        notifyListeners();
+      }
+    } catch (e) {
+      _error = e.toString();
+      // _isLoading = false;
+      notifyListeners();
+    }
+    return _isValid;
   }
 }
