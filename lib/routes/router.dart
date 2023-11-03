@@ -8,6 +8,7 @@ import 'package:food_recipe_app/pages/change_theme.dart';
 import 'package:food_recipe_app/pages/edit_profile_page.dart';
 import 'package:food_recipe_app/pages/auth_pages/login_page.dart';
 import 'package:food_recipe_app/pages/main_screen.dart';
+import 'package:food_recipe_app/pages/recipe_information_page.dart';
 import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:go_router/go_router.dart';
@@ -43,6 +44,17 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: LoginPage(),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouterConstants.recipeInfo,
+        path: '/recipe-info/:id',
+        pageBuilder: (context, state) {
+          return MaterialPage(
+            child: RecipeInformationPage(
+              id: state.pathParameters['id'].toString(),
+            ),
           );
         },
       ),

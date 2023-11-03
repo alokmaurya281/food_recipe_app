@@ -1,15 +1,21 @@
 // random recipes
-const String randomRecipes = "https://api.spoonacular.com/recipes/random";
+const String randomRecipesUrl =
+    "https://food-recipe-app-api.onrender.com/api/v1/recipes/random";
 
 // search recipes
 
 const String searchRecipes =
-    "https://api.spoonacular.com/recipes/complexSearch";
+    "https://food-recipe-app-api.onrender.com/api/v1/recipes/search";
 
 // recipes information
 
-const String recipeInfo =
-    "https://api.spoonacular.com/recipes/"; //followed by {id}/information
+const String recipeInfoUrl =
+    "https://food-recipe-app-api.onrender.com/api/v1/recipes"; //followed by {id}/information
+
+// recipes similar
+
+const String recipeSimilarUrl =
+    "https://food-recipe-app-api.onrender.com/api/v1/recipes"; //followed by {id}/similar
 
 // register user
 

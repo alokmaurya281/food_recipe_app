@@ -19,8 +19,8 @@ class _ShimmerEffectWidgetState extends State<ShimmerEffectWidget> {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Color.fromARGB(255, 207, 207, 207),
-      highlightColor: Color.fromARGB(255, 180, 180, 180),
+      baseColor: const Color.fromARGB(255, 207, 207, 207),
+      highlightColor: const Color.fromARGB(255, 148, 148, 148),
       child: Container(
         height: widget.height,
         width: widget.width,

@@ -1,18 +1,18 @@
-class Recipe {
+class Recipes {
   int id;
   String title;
   String img;
   String imgType;
 
-  Recipe({
+  Recipes({
     required this.id,
     required this.title,
     required this.img,
     required this.imgType,
   });
 
-  factory Recipe.fromJson(Map<String, dynamic> json) {
-    return Recipe(
+  factory Recipes.fromJson(Map<String, dynamic> json) {
+    return Recipes(
       id: json['id'],
       title: json['title'],
       img: json['image'],

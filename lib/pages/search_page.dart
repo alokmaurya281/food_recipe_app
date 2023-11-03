@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/models/recipe.dart';
-import 'package:food_recipe_app/pages/recipe_information_page.dart';
 import 'package:food_recipe_app/widgets/filter_bottom_sheet.dart';
-// import 'package:food_recipe_app/widgets/drawer_widget.dart';
 
 class SearchPage extends StatefulWidget {
-  final List<Recipe> searches;
+  final List<Recipes> searches;
   const SearchPage({super.key, required this.searches});
 
   @override
@@ -155,10 +153,10 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return const RecipeInformationPage();
-                              }));
+                              // Navigator.of(context)
+                              //     .push(MaterialPageRoute(builder: (context) {
+                              //   return const RecipeInformationPage();
+                              // }));
                             },
                             child: Container(
                               width: 30,

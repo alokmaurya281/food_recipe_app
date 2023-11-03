@@ -1,7 +1,7 @@
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/auth_pages/login_page.dart';
+import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/user_provider.dart';
 import 'package:food_recipe_app/widgets/shimmer_effect_widget.dart';
@@ -141,7 +141,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   ),
                 );
                 // ignore: use_build_context_synchronously
-                context.goNamed('login');
+                GoRouter.of(context)
+                    .pushReplacementNamed(RouterConstants.login);
               },
               title: const Text(
                 'Logout',
