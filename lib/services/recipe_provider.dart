@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/config/api_urls.dart';
-import 'package:food_recipe_app/models/recipe_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:food_recipe_app/models/recipe.dart';
 
@@ -28,6 +26,7 @@ class RecipeProvider extends ChangeNotifier {
 
   Future<void> searchRecipe(String query, String token) async {
     _error = '';
+    _recipesList = [];
     // notifyListeners();
     try {
       final response = await http.get(
@@ -56,6 +55,7 @@ class RecipeProvider extends ChangeNotifier {
 // get similar recipes
   Future<void> getSimilarRecipes(String id, String token) async {
     _error = '';
+    _recipesList = [];
     // notifyListeners();
     try {
       final response = await http.get(

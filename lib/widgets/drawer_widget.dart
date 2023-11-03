@@ -79,30 +79,36 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 },
               ),
             ),
-            const ListTile(
-              leading: Icon(Icons.home),
-              title: Text(
+            ListTile(
+              leading: const Icon(Icons.home),
+              onTap: () {
+                context.goNamed(RouterConstants.home);
+              },
+              title: const Text(
                 'Home',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            const ListTile(
-              leading: Icon(Icons.share),
-              title: Text(
-                'Share App',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            const ListTile(
-              leading: Icon(Icons.rate_review),
-              title: Text(
-                'Submit Review',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            const ListTile(
-              leading: Icon(Icons.settings),
-              title: Text(
+            // const ListTile(
+            //   leading: Icon(Icons.share),
+            //   title: Text(
+            //     'Share App',
+            //     style: TextStyle(fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // const ListTile(
+            //   leading: Icon(Icons.rate_review),
+            //   title: Text(
+            //     'Submit Review',
+            //     style: TextStyle(fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              onTap: () {
+                context.pushNamed(RouterConstants.settings);
+              },
+              title: const Text(
                 'Settings',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),

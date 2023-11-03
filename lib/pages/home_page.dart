@@ -31,78 +31,87 @@ class _HomePageState extends State<HomePage> {
     getData();
   }
 
+  Future<void> newe() async {
+    await Provider.of<RecipeProvider>(context, listen: false)
+        .getRandomRecipes(context.read<AuthProvider>().accessToken, '5');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
       drawer: const DrawerWidget(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView(
-          children: [
-            _searchField(),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Popular Recipes",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize: 18,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'View all',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
-                    ),
-                  ),
-                ],
+      body: RefreshIndicator.adaptive(
+        color: Theme.of(context).primaryColor,
+        onRefresh: newe,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ListView(
+            children: [
+              _searchField(),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            GestureDetector(
-              onTap: () {
-                // context.pushNamed(RouterConstants.recipeInfo, pathParameters: )
-              },
-              child: _popularRecipe(),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Editor's Choice",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize: 18,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Popular Recipes",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  TextButton(
-                    onPressed: () async {},
-                    child: const Text(
-                      'View all',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'View all',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 18),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            _EditorReciepeList(),
-          ],
+              GestureDetector(
+                onTap: () {
+                  // context.pushNamed(RouterConstants.recipeInfo, pathParameters: )
+                },
+                child: _popularRecipe(),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Editor's Choice",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 18,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async {},
+                      child: const Text(
+                        'View all',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              _EditorReciepeList(),
+            ],
+          ),
         ),
       ),
     );
@@ -418,7 +427,9 @@ class _HomePageState extends State<HomePage> {
                             icon: const Icon(Icons.error),
                             // title: const Text('Error'),
                             content: Text(
-                              provider.error,
+                              provider.error.isEmpty
+                                  ? 'Error getting data'
+                                  : provider.error,
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                               ),

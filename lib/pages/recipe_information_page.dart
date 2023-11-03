@@ -5,6 +5,7 @@ import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/widgets/shimmer_effect_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class RecipeInformationPage extends StatefulWidget {
   final String id;
@@ -22,6 +23,8 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
   void recipeInfo() async {
     await Provider.of<RecipeProvider>(context, listen: false)
         .getRecipeFullInfo(widget.id, context.read<AuthProvider>().accessToken);
+    await Provider.of<RecipeProvider>(context, listen: false)
+        .getSimilarRecipes(widget.id, context.read<AuthProvider>().accessToken);
   }
 
   @override
@@ -133,14 +136,20 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: provider.isLoading
               ? ShimmerEffectWidget(width: double.infinity, height: 500)
-              : Text(
-                  provider.isLoading ? '' : provider.recipeInfo['instructions'],
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  textAlign: TextAlign.justify,
+              : Html(
+                  data: '<p>${provider.recipeInfo["instructions"]}</p>',
+                  style: {
+                    'a': Style(
+                      textDecoration: TextDecoration.none,
+                      color: Color.fromRGBO(12, 111, 161, 1),
+                    ),
+                    'p': Style(
+                      fontSize: FontSize(16),
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.justify,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  },
                 ),
         ),
       ],
@@ -170,14 +179,20 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: provider.isLoading
               ? ShimmerEffectWidget(width: double.infinity, height: 400)
-              : Text(
-                  provider.isLoading ? '' : provider.recipeInfo['summary'],
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  textAlign: TextAlign.justify,
+              : Html(
+                  data: '<p>${provider.recipeInfo["summary"]}</p>',
+                  style: {
+                    'a': Style(
+                      textDecoration: TextDecoration.none,
+                      color: Color.fromRGBO(12, 111, 161, 1),
+                    ),
+                    'p': Style(
+                      fontSize: FontSize(16),
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.justify,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  },
                 ),
         ),
       ],

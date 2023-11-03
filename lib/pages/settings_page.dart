@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/change_theme.dart';
+import 'package:food_recipe_app/routes/router_constants.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -47,73 +48,88 @@ class _SettingsPageState extends State<SettingsPage> {
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(138, 189, 188, 188),
                       borderRadius: BorderRadius.circular(15)),
-                  child: const Column(
+                  child: Column(
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.person),
-                          SizedBox(
+                          const Icon(Icons.person),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Edit Profile',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              context.pushNamed(RouterConstants.userProfile);
+                            },
+                            child: const Text(
+                              'My Profile',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Row(
                         children: [
-                          Icon(Icons.security),
-                          SizedBox(
+                          const Icon(Icons.security),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Privacy',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              context.pushNamed(RouterConstants.privacy);
+                            },
+                            child: const Text(
+                              'Privacy',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      // const SizedBox(
+                      //   height: 16,
+                      // ),
+                      // const Row(
+                      //   children: [
+                      //     Icon(Icons.delete),
+                      //     SizedBox(
+                      //       width: 16,
+                      //     ),
+                      //     Text(
+                      //       'Delete Account',
+                      //       style: TextStyle(
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.w700,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      const SizedBox(
                         height: 16,
                       ),
                       Row(
                         children: [
-                          Icon(Icons.delete),
-                          SizedBox(
+                          const Icon(Icons.notifications),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Delete Account',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.notifications),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            'Notifications',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              context.pushNamed(RouterConstants.notifications);
+                            },
+                            child: const Text(
+                              'Notifications',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
@@ -144,9 +160,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(138, 189, 188, 188),
                       borderRadius: BorderRadius.circular(15)),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.policy),
                           SizedBox(
@@ -161,20 +177,25 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Row(
                         children: [
-                          Icon(Icons.help),
-                          SizedBox(
+                          const Icon(Icons.help),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Help and Support',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              context.pushNamed(RouterConstants.help);
+                            },
+                            child: const Text(
+                              'Help and Support',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
@@ -206,17 +227,22 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(15)),
                   child: Column(
                     children: [
-                      const Row(
+                      Row(
                         children: [
-                          Icon(Icons.report),
-                          SizedBox(
+                          const Icon(Icons.report),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Report a Problem',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              context.pushNamed(RouterConstants.reportProblem);
+                            },
+                            child: const Text(
+                              'Report a Problem',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
@@ -232,10 +258,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return const ChangeTheme();
-                              }));
+                              context.pushNamed(RouterConstants.changeTheme);
                             },
                             child: const Text(
                               'Change Theme',
@@ -250,39 +273,83 @@ class _SettingsPageState extends State<SettingsPage> {
                       const SizedBox(
                         height: 16,
                       ),
-                      const Row(
+                      Row(
                         children: [
-                          Icon(Icons.info),
-                          SizedBox(
+                          const Icon(Icons.info),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Suggest a Feature',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              context.pushNamed(RouterConstants.suggestFeature);
+                            },
+                            child: const Text(
+                              'Suggest a Feature',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Row(
-                        children: [
-                          Icon(Icons.logout),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Text(
-                            'Logout',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
+                      // const SizedBox(
+                      //   height: 16,
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     const Icon(Icons.logout),
+                      //     const SizedBox(
+                      //       width: 16,
+                      //     ),
+                      //     GestureDetector(
+                      //       onTap: () async {
+                      //         await context.read<AuthProvider>().signout();
+                      //         // ignore: use_build_context_synchronously
+                      //         context.showFlash<bool>(
+                      //           // barrierColor: Theme.of(context).primaryColor,
+                      //           barrierDismissible: true,
+                      //           duration: const Duration(seconds: 2),
+                      //           builder: (context, controller) => FlashBar(
+                      //             controller: controller,
+                      //             behavior: FlashBehavior.floating,
+                      //             shape: const RoundedRectangleBorder(
+                      //               borderRadius:
+                      //                   BorderRadius.all(Radius.circular(16)),
+                      //               side: BorderSide(
+                      //                 color: Color.fromARGB(237, 11, 182, 54),
+                      //                 strokeAlign: BorderSide.strokeAlignInside,
+                      //               ),
+                      //             ),
+                      //             margin: const EdgeInsets.all(32.0),
+                      //             clipBehavior: Clip.antiAlias,
+                      //             // showProgressIndicator: true,
+                      //             indicatorColor:
+                      //                 const Color.fromARGB(237, 11, 182, 28),
+                      //             icon: const Icon(Icons.error),
+                      //             // title: const Text('Error'),
+                      //             content: Text(
+                      //               'Signed Out Successfully',
+                      //               style: TextStyle(
+                      //                 color: Theme.of(context)
+                      //                     .colorScheme
+                      //                     .secondary,
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         );
+
+                      //       },
+                      //       child: const Text(
+                      //         'Logout',
+                      //         style: TextStyle(
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w700,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),

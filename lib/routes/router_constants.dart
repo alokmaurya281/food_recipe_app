@@ -14,4 +14,8 @@ class RouterConstants {
   static String searchPage = 'searchPage';
   static String settings = 'settings';
   static String recipeInfo = 'recipeInfo';
+  static String suggestFeature = 'suggestFeature';
+  static String reportProblem = 'reportProblem';
+  static String privacy = 'privacy';
+  static String help = 'help';
 }
