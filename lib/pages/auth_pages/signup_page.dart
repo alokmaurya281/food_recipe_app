@@ -387,9 +387,9 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     onPressed: () async {
-                      provider.setLoading(true);
+                      provider.setSocialLoading(true);
                       await provider.signInWithGoogle('Google');
-                      provider.setLoading(false);
+                      provider.setSocialLoading(false);
 
                       if (provider.error.isEmpty && provider.user != null) {
                         // ignore: use_build_context_synchronously
@@ -460,7 +460,7 @@ class _SignupPageState extends State<SignupPage> {
                         );
                       }
                     },
-                    child: provider.isLoading
+                    child: provider.socialSigninLoading
                         ? SizedBox(
                             width: 15,
                             height: 15,

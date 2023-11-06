@@ -36,17 +36,6 @@ class AppRouter {
 
   GoRouter router = GoRouter(
     initialLocation: '/',
-    redirect: (context, state) async {
-      await context.read<AuthProvider>().getToken();
-      final token = context.read<AuthProvider>().accessToken;
-      final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
-
-      bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
-      if (!isAuthenticated) {
-        return '/login';
-      }
-      return null;
-    },
     routes: [
       GoRoute(
         name: RouterConstants.home,
@@ -57,6 +46,17 @@ class AppRouter {
               index: 0,
             ),
           );
+        },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
         },
       ),
       GoRoute(
@@ -77,6 +77,17 @@ class AppRouter {
               id: state.pathParameters['id'].toString(),
             ),
           );
+        },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
         },
       ),
       GoRoute(
@@ -118,6 +129,17 @@ class AppRouter {
             child: MainScreen(index: 1),
           );
         },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
+        },
       ),
       GoRoute(
         name: RouterConstants.resetPass,
@@ -138,6 +160,17 @@ class AppRouter {
             child: SettingsPage(),
           );
         },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
+        },
       ),
       GoRoute(
         name: RouterConstants.changeTheme,
@@ -146,6 +179,17 @@ class AppRouter {
           return const MaterialPage(
             child: ChangeTheme(),
           );
+        },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
         },
       ),
       GoRoute(
@@ -156,6 +200,17 @@ class AppRouter {
             child: SuggestFeature(),
           );
         },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
+        },
       ),
       GoRoute(
         name: RouterConstants.help,
@@ -164,6 +219,17 @@ class AppRouter {
           return const MaterialPage(
             child: HelpAndSupport(),
           );
+        },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
         },
       ),
       GoRoute(
@@ -174,6 +240,17 @@ class AppRouter {
             child: ReportProblem(),
           );
         },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
+        },
       ),
       GoRoute(
         name: RouterConstants.privacy,
@@ -182,6 +259,17 @@ class AppRouter {
           return const MaterialPage(
             child: Privacy(),
           );
+        },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
         },
       ),
       GoRoute(
@@ -192,6 +280,17 @@ class AppRouter {
             child: EditProfilePage(userData: state.pathParameters),
           );
         },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
+        },
       ),
       GoRoute(
         name: RouterConstants.userProfile,
@@ -201,6 +300,17 @@ class AppRouter {
             child: ProfilePage(),
           );
         },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
+        },
       ),
       GoRoute(
         name: RouterConstants.notifications,
@@ -209,6 +319,17 @@ class AppRouter {
           return const MaterialPage(
             child: NotificationPage(),
           );
+        },
+        redirect: (context, state) async {
+          await context.read<AuthProvider>().getToken();
+          final token = context.read<AuthProvider>().accessToken;
+          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+
+          bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
+          if (!isAuthenticated) {
+            return '/login';
+          }
+          return null;
         },
       ),
       GoRoute(

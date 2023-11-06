@@ -23,6 +23,11 @@ class AuthProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+   bool _socialSigninLoading = false;
+  bool get socialSigninLoading => _socialSigninLoading;
+
+
+
   bool _isLoggedIn = false;
   String _accessToken = '';
   bool get isLoggedIn => _isLoggedIn;
@@ -31,6 +36,11 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> setLoading(bool status) async {
     _isLoading = status;
+    notifyListeners();
+  }
+
+   Future<void> setSocialLoading(bool status) async {
+    _socialSigninLoading = status;
     notifyListeners();
   }
 

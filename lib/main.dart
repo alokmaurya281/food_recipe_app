@@ -5,6 +5,9 @@ import 'package:food_recipe_app/routes/router.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/filter_provider.dart';
 import 'package:food_recipe_app/services/recipe_provider.dart';
+import 'package:food_recipe_app/services/report_provider.dart';
+import 'package:food_recipe_app/services/suggest_feature_provider.dart';
+import 'package:food_recipe_app/services/support_provider.dart';
 import 'package:food_recipe_app/services/theme_provider.dart';
 import 'package:food_recipe_app/services/user_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,6 +37,15 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => UserProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ReportProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SupportProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SuggestfeatureProvider(),
+        ),
       ],
       child: MyApp(sharedPreferences: sharedPreferences),
     ),
@@ -60,7 +72,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     check();
   }

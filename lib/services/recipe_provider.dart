@@ -13,6 +13,10 @@ class RecipeProvider extends ChangeNotifier {
   String _error = '';
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+    bool _isSearchLoading = false;
+    bool  get isSearchLoading => _isSearchLoading;
+
   String get error => _error;
 
   List<Recipes> get recipesList => _recipesList;
@@ -26,7 +30,11 @@ class RecipeProvider extends ChangeNotifier {
 
   Future<void> setLoading(bool status) async {
     _isLoading = status;
-    // notifyListeners();
+    notifyListeners();
+  }
+   Future<void> searchSetLoading(bool status) async {
+    _isSearchLoading = status;
+    notifyListeners();
   }
 
   // search recipes

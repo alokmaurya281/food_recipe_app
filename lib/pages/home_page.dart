@@ -145,21 +145,30 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         provider.isLoading
                             ? ShimmerEffectWidget(width: 150, height: 110)
-                            : Container(
-                                width: 150,
-                                height: 130,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(15)),
-                                  image: DecorationImage(
-                                    image: provider.recipesList[index].img
-                                            .toString()
-                                            .isNotEmpty
-                                        ? NetworkImage(
-                                            provider.recipesList[index].img)
-                                        : const NetworkImage(
-                                            'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?auto=format&fit=crop&q=80&w=2072&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
-                                    fit: BoxFit.cover,
+                            : GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(RouterConstants.recipeInfo,
+                                      pathParameters: {
+                                        'id': provider.recipesList[index].id
+                                            .toString(),
+                                      });
+                                },
+                                child: Container(
+                                  width: 150,
+                                  height: 130,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(15)),
+                                    image: DecorationImage(
+                                      image: provider.recipesList[index].img
+                                              .toString()
+                                              .isNotEmpty
+                                          ? NetworkImage(
+                                              provider.recipesList[index].img)
+                                          : const NetworkImage(
+                                              'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?auto=format&fit=crop&q=80&w=2072&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -398,9 +407,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onPressed: () async {
                     if (_searchQueryController.text.isNotEmpty) {
-                      provider.setLoading(true);
+                      provider.searchSetLoading(true);
                       await provider.searchRecipe(_searchQueryController.text,
                           context.read<AuthProvider>().accessToken);
+                      provider.searchSetLoading(false);
 
                       // print(provider.error);
                       if (provider.error.isNotEmpty) {
@@ -443,7 +453,6 @@ class _HomePageState extends State<HomePage> {
                           RouterConstants.searchPage,
                         );
                       }
-                      provider.setLoading(false);
                     } else {
                       context.showFlash<bool>(
                         // barrierColor: Theme.of(context).primaryColor,
@@ -476,13 +485,12 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                   },
-                  child: provider.isLoading
-                      ? SizedBox(
-                          width: 15,
-                          height: 15,
-                          child: Center(
-                            child: CircularProgressIndicator.adaptive(),
-                          ),
+                  child: provider.isSearchLoading
+                      ? Center(
+                          child: SizedBox(
+                              width: 15,
+                              height: 15,
+                              child: CircularProgressIndicator.adaptive()),
                         )
                       : const Icon(
                           Icons.search,

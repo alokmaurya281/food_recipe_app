@@ -1,16 +1,18 @@
+import 'package:flash/flash.dart';
+import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/models/recipe.dart';
 import 'package:food_recipe_app/routes/router_constants.dart';
+import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/widgets/drawer_widget.dart';
-import 'package:food_recipe_app/widgets/filter_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class SearchPage extends StatefulWidget {
-   List<Recipes> searches;
-   SearchPage({super.key, required this.searches});
+  List<Recipes> searches;
+  SearchPage({super.key, required this.searches});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -19,10 +21,11 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   List selectedFilters = [];
   bool isBreakfastfilter = false;
+  TextEditingController _searchQueryController = TextEditingController();
   @override
   void initState() {
     super.initState();
-   widget.searches = context.read<RecipeProvider>().searchrecipesList;
+    widget.searches = context.read<RecipeProvider>().searchrecipesList;
   }
 
   @override
@@ -217,6 +220,7 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
               child: TextFormField(
+                controller: _searchQueryController,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                 ),
@@ -240,31 +244,106 @@ class _SearchPageState extends State<SearchPage> {
           SizedBox(
             width: 70,
             height: 50,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(239, 11, 116, 182),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      15,
+            child: Consumer<RecipeProvider>(
+              builder: (context, provider, child) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(239, 11, 116, 182),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          15,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              onPressed: () {
-                showModalBottomSheet(
-                    isDismissible: true,
-                    context: context,
-                    showDragHandle: true,
-                    builder: (context) {
-                      return const FilterBottomSheet();
-                    });
+                  onPressed: () async {
+                    if (_searchQueryController.text.isNotEmpty) {
+                      provider.setLoading(true);
+                      await provider.searchRecipe(_searchQueryController.text,
+                          context.read<AuthProvider>().accessToken);
+
+                      // print(provider.error);
+                      if (provider.error.isNotEmpty) {
+                        // ignore: use_build_context_synchronously
+                        context.showFlash<bool>(
+                          // barrierColor: Theme.of(context).primaryColor,
+                          barrierDismissible: true,
+                          duration: const Duration(seconds: 2),
+                          builder: (context, controller) => FlashBar(
+                            controller: controller,
+                            behavior: FlashBehavior.floating,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                              side: BorderSide(
+                                color: Color.fromARGB(238, 182, 34, 11),
+                                strokeAlign: BorderSide.strokeAlignInside,
+                              ),
+                            ),
+                            margin: const EdgeInsets.all(32.0),
+                            clipBehavior: Clip.antiAlias,
+                            // showProgressIndicator: true,
+                            indicatorColor:
+                                const Color.fromARGB(238, 182, 31, 11),
+                            icon: const Icon(Icons.error),
+                            // title: const Text('Error'),
+                            content: Text(
+                              provider.error.isEmpty
+                                  ? 'Error getting data'
+                                  : provider.error,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        context.pushNamed(
+                          RouterConstants.searchPage,
+                        );
+                      }
+                      provider.setLoading(false);
+                    } else {
+                      context.showFlash<bool>(
+                        // barrierColor: Theme.of(context).primaryColor,
+                        barrierDismissible: true,
+                        duration: const Duration(seconds: 2),
+                        builder: (context, controller) => FlashBar(
+                          controller: controller,
+                          behavior: FlashBehavior.floating,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                            side: BorderSide(
+                              color: Color.fromARGB(238, 182, 34, 11),
+                              strokeAlign: BorderSide.strokeAlignInside,
+                            ),
+                          ),
+                          margin: const EdgeInsets.all(32.0),
+                          clipBehavior: Clip.antiAlias,
+                          // showProgressIndicator: true,
+                          indicatorColor:
+                              const Color.fromARGB(238, 182, 31, 11),
+                          icon: const Icon(Icons.error),
+                          // title: const Text('Error'),
+                          content: Text(
+                            'Please Enter Your Search Query',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: provider.isLoading ? Center(child: SizedBox( width: 15, height: 15,child: CircularProgressIndicator.adaptive()),) : const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                );
               },
-              child: const Icon(
-                Icons.filter_list,
-                color: Colors.white,
-                size: 22,
-              ),
             ),
           ),
         ],

@@ -67,3 +67,12 @@ const String userProfileByEmailUrl =
 
 const String updateeProfileUrl =
     'https://food-recipe-app-api.onrender.com/api/v1/user/updateprofile';
+
+const String sendReportUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/report/send';
+
+const String sendSupportUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/support/send';
+    
+const String sendSuggestionFeatureUrl =
+    'https://food-recipe-app-api.onrender.com/api/v1/suggestfeature/send';
