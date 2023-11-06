@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/config/api_urls.dart';
 import 'package:food_recipe_app/models/user.dart';
+import 'package:food_recipe_app/services/connectivity_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,11 +23,11 @@ class AuthProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  bool _isValid = false;
+  bool get isValid => _isValid;
 
-   bool _socialSigninLoading = false;
+  bool _socialSigninLoading = false;
   bool get socialSigninLoading => _socialSigninLoading;
-
-
 
   bool _isLoggedIn = false;
   String _accessToken = '';
@@ -39,7 +40,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-   Future<void> setSocialLoading(bool status) async {
+  Future<void> setSocialLoading(bool status) async {
     _socialSigninLoading = status;
     notifyListeners();
   }
@@ -365,7 +366,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<bool> isTokenValid(token) async {
-    bool _isValid = false;
+    _isValid = false;
     _error = '';
     try {
       final response = await http.get(
@@ -380,6 +381,7 @@ class AuthProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         _user = data['data'];
         _isValid = _user == null ? false : true;
+        notifyListeners();
       }
       if (!_isValid) {
         _error = 'Unauthorized';
@@ -391,5 +393,11 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
     }
     return _isValid;
+  }
+
+  Future<void> initialize() async {
+    await getToken();
+    await isTokenValid(_accessToken);
+    await ConnectivityProvider().checkConnectivity();
   }
 }

@@ -24,10 +24,9 @@ import 'package:provider/provider.dart';
 class AppRouter {
   GoRouter router = GoRouter(
     initialLocation: '/',
-    redirect: (context, state) async {
-      await context.read<ConnectivityProvider>().checkConnectivity();
+    redirect: (context, state) {
+      context.read<ConnectivityProvider>().checkConnectivity();
       bool status = context.read<ConnectivityProvider>().internetConnected;
-      // ignore: use_build_context_synchronously
       if (!status) {
         return '/internetNotConneted';
       } else {
@@ -47,10 +46,11 @@ class AppRouter {
         },
         redirect: (context, state) async {
           await context.read<AuthProvider>().getToken();
-          // ignore: use_build_context_synchronously
+          // await context.read<AuthProvider>().initialize();
           final token = context.read<AuthProvider>().accessToken;
-          // ignore: use_build_context_synchronously
-          final bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+          // await context.read<AuthProvider>().isTokenValid(token);
+          bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+          // bool isValid = context.read<AuthProvider>().isValid;
 
           bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
           if (!isAuthenticated) {

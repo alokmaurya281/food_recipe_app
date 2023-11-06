@@ -19,7 +19,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
-
   runApp(
     MultiProvider(
       providers: [
@@ -47,7 +46,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => SuggestfeatureProvider(),
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => ConnectivityProvider(),
         ),
       ],
@@ -69,9 +68,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   void check() async {
-    await context
-        .read<AuthProvider>()
-        .isTokenValid(context.read<AuthProvider>().accessToken);
+    await context.read<AuthProvider>().initialize();
+    // await context.read<AuthProvider>().getToken();
+    // await context
+    //     .read<AuthProvider>()
+    //     .isTokenValid(context.read<AuthProvider>().accessToken);
+    // print(context.read<AuthProvider>().isValid);
+    // await context.read<ConnectivityProvider>().checkConnectivity();
   }
 
   @override
@@ -113,11 +116,6 @@ class _MyAppState extends State<MyApp> {
       themeAnimationCurve: Curves.bounceInOut,
       themeMode: themeProvider.themeMode,
       routerConfig: AppRouter().router,
-      // routeInformationParser: AppRouter().router.routeInformationParser,
-      // routerDelegate: AppRouter().router.routerDelegate,
-      // home: authProvider.isLoggedIn && authProvider.accessToken.isNotEmpty
-      //     ? const MainScreen()
-      //     : const LoginPage(),
     );
   }
 }
