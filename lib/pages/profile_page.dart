@@ -190,38 +190,39 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 45,
-                              width: 150,
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return EditProfilePage(
-                                            userData: provider.user,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(239, 11, 116, 182),
-                                  ),
-                                  child: const Text(
-                                    'Edit Profile',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 16),
-                                  )),
-                            ),
-                          ],
-                        )
+                        if (provider.user.isNotEmpty)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 45,
+                                width: 150,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return EditProfilePage(
+                                              userData: provider.user,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color.fromARGB(
+                                          239, 11, 116, 182),
+                                    ),
+                                    child: const Text(
+                                      'Edit Profile',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 16),
+                                    )),
+                              ),
+                            ],
+                          )
                       ],
                     );
                   },

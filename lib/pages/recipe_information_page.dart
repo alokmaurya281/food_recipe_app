@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/routes/router_constants.dart';
+// import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/widgets/shimmer_effect_widget.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -23,14 +23,18 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
   void recipeInfo() async {
     await Provider.of<RecipeProvider>(context, listen: false)
         .getRecipeFullInfo(widget.id, context.read<AuthProvider>().accessToken);
-    await Provider.of<RecipeProvider>(context, listen: false)
-        .getSimilarRecipes(widget.id, context.read<AuthProvider>().accessToken);
   }
+
+  // void similarRecipe() async {
+  //   await Provider.of<RecipeProvider>(context, listen: false)
+  //       .getSimilarRecipes(widget.id, context.read<AuthProvider>().accessToken);
+  // }
 
   @override
   void initState() {
     super.initState();
     recipeInfo();
+    // similarRecipe();
   }
 
   @override
@@ -84,28 +88,32 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                 height: 20,
               ),
               _ingredients(provider),
-              _instuctions(provider),
+              const SizedBox(
+                height: 20,
+              ),
+              if (provider.recipeInfo['instructions'].toString().isNotEmpty)
+                _instuctions(provider),
               const SizedBox(
                 height: 30,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'Related Recipes',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: _relatedRecipes(),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 16),
+              //   child: Text(
+              //     'Related Recipes',
+              //     style: TextStyle(
+              //       fontSize: 18,
+              //       fontWeight: FontWeight.w700,
+              //       color: Theme.of(context).colorScheme.secondary,
+              //     ),
+              //   ),
+              // ),
+              // GestureDetector(
+              //   onTap: () {},
+              //   child: _relatedRecipes(),
+              // ),
+              // const SizedBox(
+              //   height: 30,
+              // ),
             ],
           );
         },
@@ -117,17 +125,20 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            'Instructions',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).colorScheme.secondary,
+        if (provider.recipeInfo["instructions"].toString().isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              provider.recipeInfo["instructions"].toString().isNotEmpty
+                  ? 'Instructions'
+                  : '',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
-        ),
         const SizedBox(
           height: 5,
         ),
@@ -141,7 +152,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                   style: {
                     'a': Style(
                       textDecoration: TextDecoration.none,
-                      color: Color.fromRGBO(12, 111, 161, 1),
+                      color: const Color.fromRGBO(12, 111, 161, 1),
                     ),
                     'p': Style(
                       fontSize: FontSize(16),
@@ -184,7 +195,7 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
                   style: {
                     'a': Style(
                       textDecoration: TextDecoration.none,
-                      color: Color.fromRGBO(12, 111, 161, 1),
+                      color: const Color.fromRGBO(12, 111, 161, 1),
                     ),
                     'p': Style(
                       fontSize: FontSize(16),
@@ -218,26 +229,32 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
             height: 12,
           ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                'Items',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).colorScheme.secondary,
+              SizedBox(
+                width: 150,
+                child: Text(
+                  'Items',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
               ),
               const SizedBox(
-                width: 50,
+                width: 10,
               ),
-              Text(
-                'Quantity',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).colorScheme.secondary,
+              SizedBox(
+                width: 150,
+                child: Text(
+                  'Quantity',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
               ),
             ],
@@ -245,45 +262,57 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
           const SizedBox(
             height: 5,
           ),
-          SizedBox(
-            width: double.infinity,
-            height: (29.0 * ingredientItemCount),
-            child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              primary: false,
-              itemCount: ingredientItemCount,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Butter Cheese',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
+          provider.isLoading
+              ? ShimmerEffectWidget(width: double.infinity, height: 400)
+              : SizedBox(
+                  width: double.infinity,
+                  height: (30.0 *
+                      (provider.recipeInfo['extendedIngredients'].length)),
+                  child: ListView.builder(
+                    itemCount:
+                        provider.recipeInfo['extendedIngredients'].length < 0
+                            ? 10
+                            : provider.recipeInfo['extendedIngredients'].length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 150,
+                              child: Text(
+                                provider.recipeInfo["extendedIngredients"]
+                                    [index]['name'],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            SizedBox(
+                              width: 150,
+                              child: Text(
+                                provider.recipeInfo["extendedIngredients"]
+                                    [index]['original'],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
-                      Text(
-                        '1 tablespoon',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          )
+                )
         ],
       ),
     );
@@ -459,79 +488,80 @@ class _RecipeInformationPageState extends State<RecipeInformationPage> {
     );
   }
 
-  SizedBox _relatedRecipes() {
-    return SizedBox(
-      width: double.infinity,
-      height: 200,
-      child: Consumer<RecipeProvider>(
-        builder: (context, provider, child) {
-          if (provider.recipesList.isEmpty) {
-            provider.setLoading(true);
-          } else {
-            provider.setLoading(false);
-          }
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: provider.recipesList.length > 0
-                ? provider.recipesList.length
-                : 10,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                width: 150,
-                height: 150,
-                child: Card(
-                  margin: const EdgeInsets.all(8),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        context.pushNamed(RouterConstants.recipeInfo,
-                            pathParameters: {
-                              'id': provider.recipesList[index].id.toString()
-                            });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          provider.isLoading
-                              ? ShimmerEffectWidget(width: 150, height: 100)
-                              : Container(
-                                  width: 150,
-                                  height: 130,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(15)),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          provider.recipesList[index].img),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                          provider.isLoading
-                              ? ShimmerEffectWidget(width: 150, height: 20)
-                              : Text(
-                                  provider.isLoading
-                                      ? ''
-                                      : provider.recipesList[index].title,
-                                  style: TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                  ),
-                                )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
+  // SizedBox _relatedRecipes() {
+  //   return SizedBox(
+  //     width: double.infinity,
+  //     height: 200,
+  //     child: Consumer<RecipeProvider>(
+  //       builder: (context, provider, child) {
+  //         if (provider.similarRecipeList.isEmpty) {
+  //           provider.setLoading(true);
+  //         } else {
+  //           provider.setLoading(false);
+  //         }
+  //         return ListView.builder(
+  //           scrollDirection: Axis.horizontal,
+  //           itemCount: provider.similarRecipeList.length > 0
+  //               ? provider.recipesList.length
+  //               : 10,
+  //           itemBuilder: (context, index) {
+  //             return SizedBox(
+  //               width: 150,
+  //               height: 150,
+  //               child: Card(
+  //                 margin: const EdgeInsets.all(8),
+  //                 child: Padding(
+  //                   padding: const EdgeInsets.all(8.0),
+  //                   child: GestureDetector(
+  //                     onTap: () {
+  //                       context.pushNamed(RouterConstants.recipeInfo,
+  //                           pathParameters: {
+  //                             'id': provider.similarRecipeList[index].id
+  //                                 .toString()
+  //                           });
+  //                     },
+  //                     child: Column(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                       children: [
+  //                         provider.isLoading
+  //                             ? ShimmerEffectWidget(width: 150, height: 100)
+  //                             : Container(
+  //                                 width: 150,
+  //                                 height: 130,
+  //                                 decoration: BoxDecoration(
+  //                                   borderRadius: const BorderRadius.all(
+  //                                       Radius.circular(15)),
+  //                                   image: DecorationImage(
+  //                                     image: NetworkImage(provider
+  //                                         .similarRecipeList[index].img),
+  //                                     fit: BoxFit.cover,
+  //                                   ),
+  //                                 ),
+  //                               ),
+  //                         provider.isLoading
+  //                             ? ShimmerEffectWidget(width: 150, height: 20)
+  //                             : Text(
+  //                                 provider.isLoading
+  //                                     ? ''
+  //                                     : provider.similarRecipeList[index].title,
+  //                                 style: TextStyle(
+  //                                   overflow: TextOverflow.ellipsis,
+  //                                   fontSize: 14,
+  //                                   fontWeight: FontWeight.w600,
+  //                                   color:
+  //                                       Theme.of(context).colorScheme.secondary,
+  //                                 ),
+  //                               )
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //             );
+  //           },
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }

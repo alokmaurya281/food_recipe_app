@@ -4,18 +4,24 @@ import 'package:food_recipe_app/pages/notifications_page.dart';
 import 'package:food_recipe_app/pages/profile_page.dart';
 import 'package:food_recipe_app/pages/search_page.dart';
 
+// ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+   int index;
+   MainScreen({
+    super.key,
+    required this.index,
+  });
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const SearchPage(searches: [],),
+     SearchPage(
+      searches: [],
+    ),
     const NotificationPage(),
     const ProfilePage(),
   ];
@@ -23,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: _bottomNavigation(),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: _widgetOptions.elementAt(widget.index),
     );
   }
 
@@ -36,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50.0),
         child: BottomNavigationBar(
-          currentIndex: _selectedIndex,
+          currentIndex: widget.index,
           type: BottomNavigationBarType.fixed,
           fixedColor: const Color.fromARGB(239, 11, 116, 182),
           // elevation: 0,
@@ -46,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
               label: "Home",
             ),
             BottomNavigationBarItem(
+              
               icon: Icon(Icons.search),
               label: "Search",
             ),
@@ -66,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      widget.index = index;
     });
   }
 }

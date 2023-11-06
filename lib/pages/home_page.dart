@@ -1,6 +1,5 @@
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/search_page.dart';
 import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/recipe_provider.dart';
@@ -399,8 +398,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onPressed: () async {
                     if (_searchQueryController.text.isNotEmpty) {
+                      provider.setLoading(true);
                       await provider.searchRecipe(_searchQueryController.text,
                           context.read<AuthProvider>().accessToken);
+
                       // print(provider.error);
                       if (provider.error.isNotEmpty) {
                         // ignore: use_build_context_synchronously
@@ -438,13 +439,11 @@ class _HomePageState extends State<HomePage> {
                         );
                       } else {
                         // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return SearchPage(searches: provider.recipesList);
-                          }),
+                        context.pushNamed(
+                          RouterConstants.searchPage,
                         );
                       }
+                      provider.setLoading(false);
                     } else {
                       context.showFlash<bool>(
                         // barrierColor: Theme.of(context).primaryColor,
@@ -477,11 +476,19 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                   },
-                  child: const Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: 22,
-                  ),
+                  child: provider.isLoading
+                      ? SizedBox(
+                          width: 15,
+                          height: 15,
+                          child: Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          ),
+                        )
+                      : const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: 22,
+                        ),
                 );
               },
             ),

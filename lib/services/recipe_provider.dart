@@ -6,12 +6,19 @@ import 'package:food_recipe_app/models/recipe.dart';
 
 class RecipeProvider extends ChangeNotifier {
   List<Recipes> _recipesList = [];
+  List<Recipes> _similarRecipesList = [];
+    List<Recipes> _searchrecipesList = [];
+
+
   String _error = '';
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   String get error => _error;
 
   List<Recipes> get recipesList => _recipesList;
+  List<Recipes> get similarRecipeList => _similarRecipesList;
+    List<Recipes> get searchrecipesList => _searchrecipesList;
+
 
   Map<String, dynamic> _recipeInfo = {};
 
@@ -26,7 +33,7 @@ class RecipeProvider extends ChangeNotifier {
 
   Future<void> searchRecipe(String query, String token) async {
     _error = '';
-    _recipesList = [];
+    _searchrecipesList = [];
     // notifyListeners();
     try {
       final response = await http.get(
@@ -36,10 +43,10 @@ class RecipeProvider extends ChangeNotifier {
           'Authorization': 'Bearer $token'
         },
       );
-      final data = json.decode(response.body);
+      final Map<String, dynamic> data = json.decode(response.body);
       if (response.statusCode == 200) {
-        for (var item in data) {
-          _recipesList.add(Recipes.fromJson(item));
+        for (var item in data['data']['results']) {
+          _searchrecipesList.add(Recipes.fromJson(item));
           notifyListeners();
         }
       } else {
@@ -55,7 +62,7 @@ class RecipeProvider extends ChangeNotifier {
 // get similar recipes
   Future<void> getSimilarRecipes(String id, String token) async {
     _error = '';
-    _recipesList = [];
+    _similarRecipesList = [];
     // notifyListeners();
     try {
       final response = await http.get(
@@ -66,9 +73,10 @@ class RecipeProvider extends ChangeNotifier {
         },
       );
       final data = json.decode(response.body);
+      print(data);
       if (response.statusCode == 200) {
         for (var item in data) {
-          _recipesList.add(Recipes.fromJson(item));
+          _similarRecipesList.add(Recipes.fromJson(item));
           notifyListeners();
         }
       } else {

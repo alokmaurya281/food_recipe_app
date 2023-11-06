@@ -12,7 +12,7 @@ class BottomNavWidget extends StatefulWidget {
 class _BottomNavWidgetState extends State<BottomNavWidget> {
   List<Widget> pages = [
     const HomePage(),
-    const SearchPage(
+    SearchPage(
       searches: [],
     ),
   ];

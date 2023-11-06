@@ -1,7 +1,6 @@
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/pages/profile_page.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
 import 'package:food_recipe_app/services/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -431,10 +430,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                         );
                         // ignore: use_build_context_synchronously
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const ProfilePage();
-                        }));
+                        Navigator.of(context).pop();
                       } else {
                         // ignore: use_build_context_synchronously
                         context.showFlash<bool>(

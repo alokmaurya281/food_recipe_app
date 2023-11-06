@@ -52,8 +52,10 @@ class AppRouter {
         name: RouterConstants.home,
         path: '/',
         pageBuilder: (context, state) {
-          return const MaterialPage(
-            child: MainScreen(),
+          return MaterialPage(
+            child: MainScreen(
+              index: 0,
+            ),
           );
         },
       ),
@@ -105,6 +107,15 @@ class AppRouter {
             child: ForgotPassAccountVerify(
               email: state.pathParameters['email'],
             ),
+          );
+        },
+      ),
+      GoRoute(
+        name: RouterConstants.searchPage,
+        path: '/search',
+        pageBuilder: (context, state) {
+          return MaterialPage(
+            child: MainScreen(index: 1),
           );
         },
       ),

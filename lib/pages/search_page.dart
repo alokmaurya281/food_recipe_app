@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/models/recipe.dart';
+import 'package:food_recipe_app/routes/router_constants.dart';
+import 'package:food_recipe_app/services/recipe_provider.dart';
+import 'package:food_recipe_app/widgets/drawer_widget.dart';
 import 'package:food_recipe_app/widgets/filter_bottom_sheet.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SearchPage extends StatefulWidget {
-  final List<Recipes> searches;
-  const SearchPage({super.key, required this.searches});
+   List<Recipes> searches;
+   SearchPage({super.key, required this.searches});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -13,11 +19,17 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   List selectedFilters = [];
   bool isBreakfastfilter = false;
+  @override
+  void initState() {
+    super.initState();
+   widget.searches = context.read<RecipeProvider>().searchrecipesList;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
+      drawer: const DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: ListView(
@@ -79,9 +91,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             )
           : ListView.builder(
-              primary: false,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
+              // shrinkWrap: true,
               itemCount: widget.searches.length,
               itemBuilder: (context, index) {
                 return SizedBox(
@@ -97,10 +107,15 @@ class _SearchPageState extends State<SearchPage> {
                           Container(
                             width: 150,
                             height: 135,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/images/pizza.jpeg'),
+                                image: widget.searches[index].img
+                                        .toString()
+                                        .isNotEmpty
+                                    ? NetworkImage(widget.searches[index].img)
+                                    : const NetworkImage(
+                                        'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?auto=format&fit=crop&q=80&w=2072&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
                               ),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(15),
@@ -115,7 +130,7 @@ class _SearchPageState extends State<SearchPage> {
                                 width: 110,
                                 // height: 75,
                                 child: Text(
-                                  'Easy Pizza Reciepehjfjjfjfdjshhjhjhjhjhh',
+                                  widget.searches[index].title,
                                   softWrap: true,
                                   maxLines: 2,
                                   style: TextStyle(
@@ -153,10 +168,10 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Navigator.of(context)
-                              //     .push(MaterialPageRoute(builder: (context) {
-                              //   return const RecipeInformationPage();
-                              // }));
+                              context.pushNamed(RouterConstants.recipeInfo,
+                                  pathParameters: {
+                                    'id': widget.searches[index].id.toString(),
+                                  });
                             },
                             child: Container(
                               width: 30,
