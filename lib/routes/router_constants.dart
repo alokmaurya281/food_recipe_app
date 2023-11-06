@@ -18,4 +18,5 @@ class RouterConstants {
   static String reportProblem = 'reportProblem';
   static String privacy = 'privacy';
   static String help = 'help';
+  static String internetNotConneted = 'internetNotConneted';
 }

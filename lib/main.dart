@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:food_recipe_app/pages/main_screen.dart';
 import 'package:food_recipe_app/routes/router.dart';
 import 'package:food_recipe_app/services/auth_provider.dart';
+import 'package:food_recipe_app/services/connectivity_provider.dart';
 import 'package:food_recipe_app/services/filter_provider.dart';
 import 'package:food_recipe_app/services/recipe_provider.dart';
 import 'package:food_recipe_app/services/report_provider.dart';
@@ -45,6 +46,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => SuggestfeatureProvider(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => ConnectivityProvider(),
         ),
       ],
       child: MyApp(sharedPreferences: sharedPreferences),

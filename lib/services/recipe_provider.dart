@@ -7,22 +7,20 @@ import 'package:food_recipe_app/models/recipe.dart';
 class RecipeProvider extends ChangeNotifier {
   List<Recipes> _recipesList = [];
   List<Recipes> _similarRecipesList = [];
-    List<Recipes> _searchrecipesList = [];
-
+  List<Recipes> _searchrecipesList = [];
 
   String _error = '';
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-    bool _isSearchLoading = false;
-    bool  get isSearchLoading => _isSearchLoading;
+  bool _isSearchLoading = false;
+  bool get isSearchLoading => _isSearchLoading;
 
   String get error => _error;
 
   List<Recipes> get recipesList => _recipesList;
   List<Recipes> get similarRecipeList => _similarRecipesList;
-    List<Recipes> get searchrecipesList => _searchrecipesList;
-
+  List<Recipes> get searchrecipesList => _searchrecipesList;
 
   Map<String, dynamic> _recipeInfo = {};
 
@@ -30,9 +28,10 @@ class RecipeProvider extends ChangeNotifier {
 
   Future<void> setLoading(bool status) async {
     _isLoading = status;
-    notifyListeners();
+    // notifyListeners();
   }
-   Future<void> searchSetLoading(bool status) async {
+
+  Future<void> searchSetLoading(bool status) async {
     _isSearchLoading = status;
     notifyListeners();
   }
