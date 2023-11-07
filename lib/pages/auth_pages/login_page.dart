@@ -432,30 +432,30 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(237, 5, 75, 214),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
-                onPressed: () {},
-                child: const Text(
-                  'Continue with Facebook',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-          ),
+          // const SizedBox(
+          //   height: 16,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16),
+          //   child: SizedBox(
+          //     height: 50,
+          //     width: double.infinity,
+          //     child: ElevatedButton(
+          //       style: ElevatedButton.styleFrom(
+          //           backgroundColor: const Color.fromARGB(237, 5, 75, 214),
+          //           shape: RoundedRectangleBorder(
+          //               borderRadius: BorderRadius.circular(15))),
+          //       onPressed: () {},
+          //       child: const Text(
+          //         'Continue with Facebook',
+          //         style: TextStyle(
+          //             color: Colors.white,
+          //             fontSize: 16,
+          //             fontWeight: FontWeight.w500),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           // Spacer(),
           const SizedBox(
             height: 16,

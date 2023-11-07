@@ -321,6 +321,8 @@ class AuthProvider extends ChangeNotifier {
       }
     } catch (error) {
       print('Error signing in with Google: $error');
+      _error = 'Error Signing in with Google Please Login with email.';
+      notifyListeners();
     }
   }
 

@@ -120,7 +120,7 @@ class _SearchPageState extends State<SearchPage> {
                                     : const NetworkImage(
                                         'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?auto=format&fit=crop&q=80&w=2072&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
                               ),
-                              borderRadius: BorderRadius.all(
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(15),
                               ),
                             ),
@@ -259,7 +259,7 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   onPressed: () async {
                     if (_searchQueryController.text.isNotEmpty) {
-                      provider.setLoading(true);
+                      provider.searchSetLoading(true);
                       await provider.searchRecipe(_searchQueryController.text,
                           context.read<AuthProvider>().accessToken);
 
@@ -304,7 +304,7 @@ class _SearchPageState extends State<SearchPage> {
                           RouterConstants.searchPage,
                         );
                       }
-                      provider.setLoading(false);
+                      provider.searchSetLoading(false);
                     } else {
                       context.showFlash<bool>(
                         // barrierColor: Theme.of(context).primaryColor,
@@ -337,11 +337,18 @@ class _SearchPageState extends State<SearchPage> {
                       );
                     }
                   },
-                  child: provider.isLoading ? Center(child: SizedBox( width: 15, height: 15,child: CircularProgressIndicator.adaptive()),) : const Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: 22,
-                  ),
+                  child: provider.isSearchLoading
+                      ? const Center(
+                          child: SizedBox(
+                              width: 15,
+                              height: 15,
+                              child: CircularProgressIndicator.adaptive()),
+                        )
+                      : const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: 22,
+                        ),
                 );
               },
             ),
