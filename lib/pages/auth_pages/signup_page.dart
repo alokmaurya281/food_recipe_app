@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
@@ -411,7 +413,7 @@ class _SignupPageState extends State<SignupPage> {
                             margin: const EdgeInsets.all(32.0),
                             clipBehavior: Clip.antiAlias,
                             // showProgressIndicator: true,
-                            indicatorColor: Color.fromARGB(237, 11, 182, 28),
+                            indicatorColor: const Color.fromARGB(237, 11, 182, 28),
                             icon: const Icon(Icons.error),
                             // title: const Text('Error'),
                             content: Text(

@@ -127,6 +127,7 @@ class RecipeProvider extends ChangeNotifier {
   // get recipe info recipes
   Future<void> getRecipeFullInfo(String id, String token) async {
     _error = '';
+    _recipeInfo = {};
     // notifyListeners();
     try {
       final response = await http.get(

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, prefer_typing_uninitialized_variables
+
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
@@ -208,15 +210,106 @@ class _OtpPageState extends State<OtpPage> {
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                   ),
-                  GestureDetector(
-                    child: Text(
-                      'Resend',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
+                  Consumer<AuthProvider>(
+                    builder: (context, provider, child) {
+                      return GestureDetector(
+                        onTap: () async {
+                          provider.setSocialLoading(true);
+                          await provider.sendOTP(widget.email);
+                          provider.setSocialLoading(false);
+
+                          if (provider.error.isEmpty && provider.user != null) {
+                            // ignore: use_build_context_synchronously
+                            context.showFlash<bool>(
+                              // barrierColor: Theme.of(context).primaryColor,
+                              barrierDismissible: true,
+                              duration: const Duration(seconds: 2),
+                              builder: (context, controller) => FlashBar(
+                                controller: controller,
+                                behavior: FlashBehavior.floating,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  side: BorderSide(
+                                    color: Color.fromARGB(237, 11, 182, 54),
+                                    strokeAlign: BorderSide.strokeAlignInside,
+                                  ),
+                                ),
+                                margin: const EdgeInsets.all(32.0),
+                                clipBehavior: Clip.antiAlias,
+                                // showProgressIndicator: true,
+                                indicatorColor:
+                                    const Color.fromARGB(237, 11, 182, 28),
+                                icon: const Icon(Icons.error),
+                                // title: const Text('Error'),
+                                content: Text(
+                                  'Otp Resent Successfully',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
+                                ),
+                              ),
+                            );
+                            // ignore: use_build_context_synchronously
+                            GoRouter.of(context).pushReplacementNamed(
+                                RouterConstants.otp,
+                                pathParameters: {
+                                  "email": widget.email,
+                                });
+                          } else {
+                            // ignore: use_build_context_synchronously
+                            context.showFlash<bool>(
+                              // barrierColor: Theme.of(context).primaryColor,
+                              barrierDismissible: true,
+                              duration: const Duration(seconds: 2),
+                              builder: (context, controller) => FlashBar(
+                                controller: controller,
+                                behavior: FlashBehavior.floating,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  side: BorderSide(
+                                    color: Color.fromARGB(238, 182, 34, 11),
+                                    strokeAlign: BorderSide.strokeAlignInside,
+                                  ),
+                                ),
+                                margin: const EdgeInsets.all(32.0),
+                                clipBehavior: Clip.antiAlias,
+                                // showProgressIndicator: true,
+                                indicatorColor:
+                                    const Color.fromARGB(238, 182, 31, 11),
+                                icon: const Icon(Icons.error),
+                                // title: const Text('Error'),
+                                content: Text(
+                                  provider.error,
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text(
+                          provider.socialSigninLoading
+                              ? 'OTP Resending'
+                              : 'Resend',
+                          style: provider.socialSigninLoading
+                              ? const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                )
+                              : TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               )),
@@ -264,7 +357,7 @@ class _OtpPageState extends State<OtpPage> {
                             margin: const EdgeInsets.all(32.0),
                             clipBehavior: Clip.antiAlias,
                             // showProgressIndicator: true,
-                            indicatorColor: Color.fromARGB(235, 17, 182, 11),
+                            indicatorColor: const Color.fromARGB(235, 17, 182, 11),
                             icon: const Icon(Icons.error),
                             // title: const Text('Error'),
                             content: Text(
@@ -275,6 +368,7 @@ class _OtpPageState extends State<OtpPage> {
                             ),
                           ),
                         );
+                        // ignore: use_build_context_synchronously
                         GoRouter.of(context).pushReplacementNamed(
                           RouterConstants.login,
                         );

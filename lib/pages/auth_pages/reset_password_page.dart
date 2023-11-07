@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ResetPasswordPage extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final email;
   const ResetPasswordPage({super.key, required this.email});
 
@@ -188,7 +191,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               margin: const EdgeInsets.all(32.0),
                               clipBehavior: Clip.antiAlias,
                               // showProgressIndicator: true,
-                              indicatorColor: Color.fromARGB(235, 71, 182, 11),
+                              indicatorColor: const Color.fromARGB(235, 71, 182, 11),
                               icon: const Icon(Icons.error),
                               // title: const Text('Error'),
                               content: Text(
@@ -201,6 +204,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             ),
                           );
                           await provider.signout();
+                          // ignore: use_build_context_synchronously
                           GoRouter.of(context)
                               .pushReplacementNamed(RouterConstants.login);
                         } else {
@@ -223,7 +227,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               margin: const EdgeInsets.all(32.0),
                               clipBehavior: Clip.antiAlias,
                               // showProgressIndicator: true,
-                              indicatorColor: Color.fromARGB(235, 182, 57, 11),
+                              indicatorColor: const Color.fromARGB(235, 182, 57, 11),
                               icon: const Icon(Icons.error),
                               // title: const Text('Error'),
                               content: Text(
@@ -256,7 +260,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             margin: const EdgeInsets.all(32.0),
                             clipBehavior: Clip.antiAlias,
                             // showProgressIndicator: true,
-                            indicatorColor: Color.fromARGB(235, 182, 57, 11),
+                            indicatorColor: const Color.fromARGB(235, 182, 57, 11),
                             icon: const Icon(Icons.error),
                             // title: const Text('Error'),
                             content: Text(

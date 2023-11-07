@@ -45,6 +45,7 @@ class _InternetNotConnectedState extends State<InternetNotConnected> {
                   onPressed: () async {
                     await provider.checkConnectivity();
                     if (provider.internetConnected) {
+                      // ignore: use_build_context_synchronously
                       context.goNamed(RouterConstants.home);
                     }
                   },

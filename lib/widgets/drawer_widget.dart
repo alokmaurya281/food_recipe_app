@@ -7,6 +7,7 @@ import 'package:food_recipe_app/services/user_provider.dart';
 import 'package:food_recipe_app/widgets/shimmer_effect_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -89,20 +90,29 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            // const ListTile(
-            //   leading: Icon(Icons.share),
-            //   title: Text(
-            //     'Share App',
-            //     style: TextStyle(fontWeight: FontWeight.bold),
-            //   ),
-            // ),
-            // const ListTile(
-            //   leading: Icon(Icons.rate_review),
-            //   title: Text(
-            //     'Submit Review',
-            //     style: TextStyle(fontWeight: FontWeight.bold),
-            //   ),
-            // ),
+            ListTile(
+              leading: const Icon(Icons.share),
+              onTap: () {
+                Share.share(
+                    'Download Food Recipe App from https://alokmaurya281.github.io/food-recipe-web/food_recipe_app.apk  And Get Exiciting Recipies......',
+                    subject:
+                        'Food Recipe App Download App to get interesting Recipes!');
+              },
+              title: const Text(
+                'Share App',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                context.pushNamed(RouterConstants.reportProblem);
+              },
+              leading: const Icon(Icons.error),
+              title: const Text(
+                'Report Problem',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
             ListTile(
               leading: const Icon(Icons.settings),
               onTap: () {

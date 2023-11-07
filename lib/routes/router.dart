@@ -46,12 +46,9 @@ class AppRouter {
         },
         redirect: (context, state) async {
           await context.read<AuthProvider>().getToken();
-          // await context.read<AuthProvider>().initialize();
           final token = context.read<AuthProvider>().accessToken;
-          // await context.read<AuthProvider>().isTokenValid(token);
+          // ignore: use_build_context_synchronously
           bool isLoggedIn = context.read<AuthProvider>().isLoggedIn;
-          // bool isValid = context.read<AuthProvider>().isValid;
-
           bool isAuthenticated = isLoggedIn && token.isNotEmpty ? true : false;
           if (!isAuthenticated) {
             return '/login';

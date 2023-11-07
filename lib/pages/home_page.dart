@@ -64,14 +64,14 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 18,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'View all',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 18),
-                      ),
-                    ),
+                    // TextButton(
+                    //   onPressed: () {},
+                    //   child: const Text(
+                    //     'View all',
+                    //     style: TextStyle(
+                    //         fontWeight: FontWeight.w700, fontSize: 18),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -97,14 +97,14 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 18,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () async {},
-                      child: const Text(
-                        'View all',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 18),
-                      ),
-                    ),
+                    // TextButton(
+                    //   onPressed: () async {},
+                    //   child: const Text(
+                    //     'View all',
+                    //     style: TextStyle(
+                    //         fontWeight: FontWeight.w700, fontSize: 18),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

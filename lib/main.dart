@@ -69,14 +69,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   void check() async {
     await context.read<AuthProvider>().initialize();
-    await context.read<ThemeProvider>().getTheme();
-
-    // await context.read<AuthProvider>().getToken();
-    // await context
-    //     .read<AuthProvider>()
-    //     .isTokenValid(context.read<AuthProvider>().accessToken);
-    // print(context.read<AuthProvider>().isValid);
-    // await context.read<ConnectivityProvider>().checkConnectivity();
+    await context.read<ConnectivityProvider>().checkConnectivity();
   }
 
   @override

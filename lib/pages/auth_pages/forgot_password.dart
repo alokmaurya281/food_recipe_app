@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flash/flash.dart';
 import 'package:flash/flash_helper.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +158,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               margin: const EdgeInsets.all(32.0),
                               clipBehavior: Clip.antiAlias,
                               // showProgressIndicator: true,
-                              indicatorColor: Color.fromARGB(235, 42, 182, 11),
+                              indicatorColor: const Color.fromARGB(235, 42, 182, 11),
                               icon: const Icon(Icons.error),
                               // title: const Text('Error'),
                               content: Text(
@@ -168,6 +170,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               ),
                             ),
                           );
+                          // ignore: use_build_context_synchronously
                           GoRouter.of(context).pushNamed(
                               RouterConstants.forgotPassAccountVerify,
                               pathParameters: {'email': _emailController.text});

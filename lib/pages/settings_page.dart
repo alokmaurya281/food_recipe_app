@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/routes/router_constants.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -80,8 +81,12 @@ class _SettingsPageState extends State<SettingsPage> {
                             width: 16,
                           ),
                           GestureDetector(
-                            onTap: () {
-                              context.pushNamed(RouterConstants.privacy);
+                            onTap: () async {
+                              const url =
+                                  'https://alokmaurya281.github.io/food-recipe-web/privacy-policy.html';
+                              if (await launchUrl(Uri.parse(url))) {
+                                await launchUrl(Uri.parse(url));
+                              }
                             },
                             child: const Text(
                               'Privacy',
@@ -162,17 +167,26 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(15)),
                   child: Column(
                     children: [
-                      const Row(
+                      Row(
                         children: [
-                          Icon(Icons.policy),
-                          SizedBox(
+                          const Icon(Icons.policy),
+                          const SizedBox(
                             width: 16,
                           ),
-                          Text(
-                            'Terms & Poilcy',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () async {
+                              const url =
+                                  'https://alokmaurya281.github.io/food-recipe-web/privacy-policy.html';
+                              if (await launchUrl(Uri.parse(url))) {
+                                await launchUrl(Uri.parse(url));
+                              }
+                            },
+                            child: const Text(
+                              'Terms & Poilcy',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ],
