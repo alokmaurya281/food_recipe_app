@@ -94,7 +94,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               leading: const Icon(Icons.share),
               onTap: () {
                 Share.share(
-                    'Download Food Recipe App from https://alokmaurya281.github.io/food-recipe-web/app-release.apk  And Get Exiciting Recipies......',
+                    'Download Food Recipe App from https://drive.google.com/file/d/1tHKr8BC3mK-Uuxg-MJYzviZg9SaOsXIZ/view?usp=sharing  And Get Exiciting Recipies......',
                     subject:
                         'Food Recipe App Download App to get interesting Recipes!');
               },
